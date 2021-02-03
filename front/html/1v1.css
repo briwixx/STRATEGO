@@ -1,0 +1,352 @@
+body
+	{
+		margin: 0;
+		padding: 0;
+		background-color: #3E4143;
+	}
+.main
+	{
+		max-height: 550px;;
+		color: white;
+		font-size: 38pt;
+		text-align: center;
+		line-height: 550px;
+	}
+
+
+									/****************POUR LE FOOTER**********************/
+footer
+	{
+			position: static;
+			bottom: 0;
+	}
+.footer-distributed
+	{
+			box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+			box-sizing: border-box;
+			width: 100%;
+			text-align: left;
+			font: bold 16px sans-serif;
+			padding: 55px 50px;
+			margin-top: 80px;
+	}
+								/* Pour la taille des 3 cadrans*/
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right
+	{
+			display: inline-block;
+			vertical-align: top;
+	}
+
+						/* Pour le cadran à gauche */
+.footer-distributed .footer-left
+	{
+		width: 40%;
+	}
+.footer-distributed h3
+	{
+		color:  #ffffff;
+		font: normal 36px 'Cookie', cursive;
+		margin: 0;
+	}
+.footer-distributed h3 span
+	{
+		color:  #5383d3;
+	}
+.footer-distributed .footer-words
+	{
+		color:  #ffffff;
+		margin: 20px 0 12px;
+		padding: 0;
+	}
+.footer-distributed .footer-words a
+	{
+		display:inline-block;
+		line-height: 1.8;
+		text-decoration: none;
+		color:  inherit;
+	}
+						/* Pour le cadran au milieu */
+.footer-distributed .footer-center
+	{
+		width: 35%;
+	}
+.footer-distributed .footer-center i
+	{
+		background-color:  #33383b;
+		color: #ffffff;
+		font-size: 25px;
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 42px;
+		margin: 10px 15px;
+		vertical-align: middle;
+	}
+.footer-distributed .footer-center i.fa-envelope
+	{
+		font-size: 17px;
+		line-height: 38px;
+	}
+.footer-distributed .footer-center p
+	{
+		display: inline-block;
+		color: #ffffff;
+		vertical-align: middle;
+		margin:0;
+	}
+.footer-distributed .footer-center p span
+	{
+		display:block;
+		font-weight: normal;
+		font-size:14px;
+		line-height:2;
+	}
+.footer-distributed .footer-center p a
+	{
+		color:  #5383d3;
+		text-decoration: none;;
+	}
+						/* Pour le cadran à droite */
+.footer-distributed .footer-right
+	{
+		width: 20%;
+	}
+						/* Pour le "A propos" */
+.footer-distributed .footer-company-about
+	{
+		line-height: 20px;
+		color:  #92999f;
+		font-size: 13px;
+		font-weight: normal;
+		margin: 0;
+	}
+.footer-distributed .footer-company-about span
+	{
+		display: block;
+		color:  #ffffff;
+		font-size: 14px;
+		font-weight: bold;
+		margin-bottom: 20px;
+	}
+.footer-distributed .footer-company-name
+	{
+		color:  #8f9296;
+		font-size: 14px;
+		font-weight: normal;
+		margin: 0;
+	}
+/* Pour les icônes du footer */
+.footer-distributed .footer-icons
+	{
+		margin-top: 25px;
+	}
+.footer-distributed .footer-icons a
+	{
+		display: inline-block;
+		width: 35px;
+		height: 35px;
+		background-color:  #33383b;
+		border-radius: 2px;
+		font-size: 20px;
+		color: #ffffff;
+		text-align: center;
+		line-height: 35px;
+		margin-right: 3px;
+		margin-bottom: 5px;
+	}
+									/****************FIN FOOTER**********************/
+
+									/****************POUR ADAPTER LE SITE A LA TAILLE DE L'ECRAN**********************/
+@media (max-width: 880px)
+	{
+		.footer-distributed
+			{
+				font: bold 14px sans-serif;
+			}
+		.footer-distributed .footer-left,
+		.footer-distributed .footer-center,
+		.footer-distributed .footer-right
+			{
+				display: block;
+				width: 100%;
+				margin-bottom: 40px;
+				text-align: center;
+			}
+
+		.footer-distributed .footer-center i
+			{
+				margin-left: 0;
+			}
+		.main
+			{
+				line-height: normal;
+				font-size: auto;
+			}
+
+	}
+									/****************FIN TAILLE ECRAN**********************/
+
+									/****************POUR LE MENU**********************/
+#menu
+	{
+		width: 100%;
+		margin: 0;
+		padding: 10px 0 0 0;
+		list-style: none;
+		/*background-color: #3E4143;*/
+	}
+#menu li
+	{
+		float: left;
+		padding: 0 0 10px 0;
+		position: relative;
+	}
+#menu a
+	{
+		float: left;
+		height: 25px;
+		padding: 0 25px;
+		color: #999;
+		text-transform: uppercase;
+		font: bold 12px/25px Arial, Helvetica;
+		text-decoration: none;
+	}
+#menu li:hover > a
+	{
+		color: #fafafa;
+	}
+*html #menu li a:hover
+	{
+		color: #fafafa;
+	}
+#menu li:hover > ul
+	{
+		display: block;
+	}
+									/* Sous-menu */
+#menu ul
+	{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: none;
+		position: absolute;
+		top: 35px;
+		z-index: 99999;
+		background: #515455;
+	}
+#menu ul li
+	{
+		float: none;
+		margin: 0;
+		padding: 0;
+		display: block;
+	}
+#menu ul a
+	{
+		padding: 10px;
+		height: auto;
+		line-height: 1;
+		display: block;
+		white-space: nowrap;
+		float: none;
+		text-transform: none;
+	}
+#menu ul a:hover
+	{
+		background: #5383d3;
+		background: -moz-linear-gradient(#5383d3,  #0186ba);
+		background: -webkit-linear-gradient(#5383d3,  #0186ba);
+		background: -o-linear-gradient(#5383d3,  #0186ba);
+		background: -ms-linear-gradient(#5383d3,  #0186ba);
+		background: linear-gradient(#5383d3,  #0186ba);
+	}
+#menu ul li:first-child a:after /* Forme de la sous catégorie en carré*/
+	{
+		content: '';
+		position: absolute;
+		left: 30px;
+		top: -8px;
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-bottom: 8px solid #515455;
+	}
+#menu ul li:first-child a:hover:after  /* Pour que la pointe soit en bleu aussi sinon elle est en #444*/
+	{
+		border-bottom-color: #5383d3;
+	}
+									/* Rétablissement du flottement après le passage de la souris */
+#menu:after
+	{
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}
+									/****************FIN MENU**********************/
+
+
+									/* Corps */
+h3
+{
+  font-size: 24px;
+  text-shadow: -1px -1px #eee, 1px 1px #888, -3px 0 4px #000;
+  font-family:"Segoe print", Arial, Helvetica, sans-serif;
+  color:#ccc;
+  padding:16px;
+  font-weight:lighter;
+  -moz-box-shadow: 2px 2px 6px #888;
+  -webkit-box-shadow: 2px 2px 6px #888;
+  box-shadow:2px 2px 6px #888;
+  text-align:center;
+  display:inline;
+  line-height:92px;
+  background-image:url(imagejeu.jpg);
+}
+
+section
+{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+article, aside
+{
+    text-align: justify;
+}
+
+article
+{
+    margin-right: 20px;
+    flex: 3;
+}
+
+.ico_categorie
+{
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+article p
+{
+    font-size: 0.8em;
+}
+
+aside
+{
+    flex: 1.2;
+    position: relative;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 0.9em;
+}
