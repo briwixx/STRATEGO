@@ -19,7 +19,3 @@ socket.on('new-message', msg => {
     item.textContent = msg;
     messages.appendChild(item);
 });
-
-
-
-
