@@ -7,7 +7,7 @@ class Plateau {
     this.plateau = new Array(this.lignes);
 
     for (let i = 0 ; i < this.plateau.length ; i++){
-      this.plateau[i] = new array(this.colonnes);
+      this.plateau[i] = new Array(this.colonnes);
     }
   }
     //Création des 2 lacs 4x4 :

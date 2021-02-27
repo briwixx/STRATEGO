@@ -1,26 +1,25 @@
 class Pion {
   constructor() {
   }
+
+  FirstPlacement(posX,posY) {
+    this.posX = posX;
+    this.posY = posY;
+  }
+
+  captureDrapeau(){
+    //fin de partie
+  }
 }
 
 class MovablePion extends Pion {
   constructor() {
-
+    super();
   }
-}
-
-Pion.protoype.FirstPlacement(posX, posY){
-  this.posX = posX;
-  this.posY = posY;
-}
-
-MovablePion.protoype.Avancer(nbCasesX,nbCasesY){ // Bombes et Drapeau can't move, Eclaireur que en avant
-  this.posX+=nbCasesX;
-  this.posY+=nbCasesY;
-}
-
-Pion.protoype.captureDrapeau(){
-  //fin de partie
+  Avancer(nbCasesX,nbCasesY){ // Bombes et Drapeau peuvent pas bouger, Eclaireur que en avant
+    this.posX+=nbCasesX;
+    this.posY+=nbCasesY;
+  }
 }
 
 class Marechal extends MovablePion {
@@ -101,14 +100,17 @@ class Colonels extends MovablePion {
 
 class Drapeau extends Pion{
   constructor(){
+    super();
+  }
+  isTaken(){
 
   }
-
 }
+
 
 class Bombes extends Pion {
   constructor(){
-
+    super();
   }
 
 }
