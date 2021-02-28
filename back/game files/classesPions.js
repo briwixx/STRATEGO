@@ -101,9 +101,18 @@ class Colonels extends MovablePion {
 class Drapeau extends Pion{
   constructor(){
     super();
+    this.taken = false;
   }
+  //Méthodes : 
   isTaken(){
-
+    if(this.taken == false) {
+      if (Pion.captureDrapeau == true){ //Si un pion parvient à prendre le drapeau
+        this.taken = true;
+      }
+    }
+    else if (this.taken == true){
+      return this.taken;
+    }
   }
 }
 

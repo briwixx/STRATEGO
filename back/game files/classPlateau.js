@@ -10,19 +10,29 @@ class Plateau {
       this.plateau[i] = new Array(this.colonnes);
     }
   }
-    //Création des 2 lacs 4x4 :
+    //Remplissage tableau avec des 1 :
+    remplir(){
+
+      for(let i = 0 ; i < this.lignes ; i++){
+        for (let j = 0; j < this.colonnes ; j++){
+          this.plateau[i][j] = 1;
+        }
+      }
+    }
+    //Création des 2 lacs 4x4 avec des 0:
     lacs(){
     for (let i = 0 ; i < 2 ; i++){
-      this.plateau[4+i][2] = -1;
-      this.plateau[4+i][6] = -1;
+      this.plateau[4+i][2] = 0;
+      this.plateau[4+i][6] = 0;
       for (let j = 0 ; j < 2 ; j++){
-        this.plateau[4+i][3] = -1;
-        this.plateau[4+i][7] = -1;
+        this.plateau[4+i][3] = 0;
+        this.plateau[4+i][7] = 0;
       }
     }
   }
 
 }
 let plateau = new Plateau(10,10);
-plateau.lacs;
+plateau.remplir();
+plateau.lacs();
 console.log(plateau);

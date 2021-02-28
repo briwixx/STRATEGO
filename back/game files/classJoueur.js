@@ -46,4 +46,10 @@ class Joueur {
 let PlayerRed = new Joueur(40);
 let PlayerBlue = new Joueur(40);
 
+console.log(PlayerRed.pionsJoueur[33]);
+console.log(PlayerRed.pionsJoueur[33].isTaken());
+
+if(PlayerRed.pionsJoueur[33].isTaken()!=true){
+  console.log("OK");
+}
 //while(PlayerRed.pionsJoueur[33]!=false && PlayerBlue.pionsJoueur[33]!=false){}
