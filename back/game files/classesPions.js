@@ -16,9 +16,14 @@ class MovablePion extends Pion {
   constructor() {
     super();
   }
-  Avancer(nbCasesX,nbCasesY){ // Bombes et Drapeau peuvent pas bouger, Eclaireur que en avant
+  Avancer(nbCasesX,nbCasesY,plateau){ // Bombes et Drapeau peuvent pas bouger, Eclaireur que en avant
+    if(plateau[nbCasesX][nbCasesY]==1){
     this.posX+=nbCasesX;
     this.posY+=nbCasesY;
+    }
+    else {
+      console.log("Plouf ! (Vous êtes tombé dans un lac ! )")
+    }
   }
 }
 
@@ -103,7 +108,7 @@ class Drapeau extends Pion{
     super();
     this.taken = false;
   }
-  //Méthodes : 
+  //Méthodes :
   isTaken(){
     if(this.taken == false) {
       if (Pion.captureDrapeau == true){ //Si un pion parvient à prendre le drapeau
