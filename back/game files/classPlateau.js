@@ -34,5 +34,4 @@ class Plateau {
 }
 let plateau = new Plateau(10,10);
 plateau.remplir();
-plateau.lacs();
-console.log(plateau);
+plateau.lacs(); // A mettre dans le constructor

@@ -52,4 +52,3 @@ console.log(PlayerRed.pionsJoueur[33].isTaken());
 if(PlayerRed.pionsJoueur[33].isTaken()!=true){
   console.log("OK");
 }
-//while(PlayerRed.pionsJoueur[33]!=false && PlayerBlue.pionsJoueur[33]!=false){}
