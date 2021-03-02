@@ -9,18 +9,14 @@ class Plateau {
     for (let i = 0 ; i < this.plateau.length ; i++){
       this.plateau[i] = new Array(this.colonnes);
     }
-  }
-    //Remplissage tableau avec des 1 :
-    remplir(){
 
-      for(let i = 0 ; i < this.lignes ; i++){
-        for (let j = 0; j < this.colonnes ; j++){
-          this.plateau[i][j] = 1;
-        }
+    //Remplissage tableau avec des 1 :
+    for(let i = 0 ; i < this.lignes ; i++){
+      for (let j = 0; j < this.colonnes ; j++){
+        this.plateau[i][j] = 1;
       }
     }
     //Création des 2 lacs 4x4 avec des 0:
-    lacs(){
     for (let i = 0 ; i < 2 ; i++){
       this.plateau[4+i][2] = 0;
       this.plateau[4+i][6] = 0;
@@ -30,8 +26,5 @@ class Plateau {
       }
     }
   }
-
 }
 let plateau = new Plateau(10,10);
-plateau.remplir();
-plateau.lacs(); // A mettre dans le constructor
