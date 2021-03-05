@@ -1,6 +1,6 @@
 class Joueur {
-  constructor(nbPieces) {
-    this.pionsJoueur = new Array(nbPieces);
+  constructor() {
+    this.pionsJoueur = new Array(40);
 
     this.pionsJoueur[0] = new Marechal();
     this.pionsJoueur[1] = new General();
@@ -35,9 +35,33 @@ class Joueur {
   }
 }
 
-let PlayerRed = new Joueur(40);
-let PlayerBlue = new Joueur(40);
+let PlayerRed = new Joueur();
+let PlayerBlue = new Joueur();
 
-//console.log(PlayerRed.pionsJoueur[2].name); // afiche nom du pion
+
 
 // Affichage des pions de chaque joueur sous le plateau :
+let divpions = document.getElementById('pionsPlayer');
+
+function genPionsButtons(){
+
+  let msgred = document.createElement("p");
+  msgred.textContent = "Pions du joueur Rouge :"
+  divpions.appendChild(msgred);
+  for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
+    let butnPion = document.createElement("button");
+    butnPion.className = "BoutonPion";
+    butnPion.innerHTML = PlayerRed.pionsJoueur[i].name;
+    divpions.appendChild(butnPion);
+  }
+
+  let msgblu = document.createElement("p");
+  msgblu.textContent = "Pions du joueur Bleu :"
+  divpions.appendChild(msgblu);
+  for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
+    let butnPion = document.createElement("button");
+    butnPion.className = "BoutonPion";
+    butnPion.innerHTML = PlayerBlue.pionsJoueur[i].name;
+    divpions.appendChild(butnPion);
+  }
+}
