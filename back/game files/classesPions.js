@@ -1,5 +1,7 @@
+// Classes des différents pions :
 class Pion {
-  constructor() {
+  constructor(name) {
+    this.name = name;
   }
 
   FirstPlacement(posX,posY) {
@@ -13,8 +15,9 @@ class Pion {
 }
 
 class MovablePion extends Pion {
-  constructor() {
+  constructor(name) {
     super();
+    this.name = name;
   }
   Avancer(nbCasesX,nbCasesY,plateau){ // Bombes et Drapeau peuvent pas bouger, Eclaireur que en avant
     if(plateau[nbCasesX][nbCasesY]==1){
@@ -29,7 +32,7 @@ class MovablePion extends Pion {
 
 class Marechal extends MovablePion {
   constructor(){
-    super();
+    super("marechal");
   }
   frappeEspion(){
 
@@ -38,7 +41,7 @@ class Marechal extends MovablePion {
 
 class Espion extends MovablePion {
   constructor(){
-    super();
+    super("espion");
   }
   frappeMarechal(){
 
@@ -47,7 +50,7 @@ class Espion extends MovablePion {
 
 class Demineurs extends MovablePion {
   constructor(){
-    super();
+    super("demineur");
   }
   demineBombe(){
 
@@ -56,56 +59,59 @@ class Demineurs extends MovablePion {
 
 class General extends MovablePion {
   constructor(){
-    super();
+    super("general");
   }
 
 }
 
-class Eclaireurs extends MovablePion {
+class Eclaireurs extends Pion {
   constructor(){
-    super();
+    super("eclaireur");
   }
 //ne bouge qu'en avant
+  Avancer(){
+
+  }
 }
 
 class Sergents extends MovablePion {
   constructor(){
-    super();
+    super("sergent");
   }
 
 }
 
 class Lieutenants extends MovablePion {
   constructor(){
-    super();
+    super("lieutenant");
   }
 
 }
 
 class Capitaines extends MovablePion {
   constructor(){
-    super();
+    super("capitaine");
   }
 
 }
 
 class Commandants extends MovablePion {
   constructor(){
-    super();
+    super("commandant");
   }
 
 }
 
 class Colonels extends MovablePion {
   constructor(){
-    super();
+    super("colonel");
   }
 
 }
 
 class Drapeau extends Pion{
   constructor(){
-    super();
+    super("drapeau");
     this.taken = false;
   }
   //Méthodes :
@@ -124,7 +130,7 @@ class Drapeau extends Pion{
 
 class Bombes extends Pion {
   constructor(){
-    super();
+    super("bombe");
   }
 
 }

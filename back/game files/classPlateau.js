@@ -1,5 +1,6 @@
 class Plateau {
   constructor(lignes,colonnes) {
+
     this.lignes = lignes;
     this.colonnes = colonnes;
 

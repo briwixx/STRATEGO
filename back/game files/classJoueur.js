@@ -33,15 +33,11 @@ class Joueur {
       this.pionsJoueur[i] = new Bombes();
     }
   }
-  yourTurn(){
-    if(this.pionsJoueur[33]==false){
-      return false;
-    }
-    else{
-      return true;
-    }
-  }
 }
 
 let PlayerRed = new Joueur(40);
 let PlayerBlue = new Joueur(40);
+
+//console.log(PlayerRed.pionsJoueur[2].name); // afiche nom du pion
+
+// Affichage des pions de chaque joueur sous le plateau :

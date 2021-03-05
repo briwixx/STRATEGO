@@ -19,10 +19,12 @@ function createPlateauButtons() {
   for (let i = 0 ; i < 10 ; i++){
     for (let j = 0 ; j < 10 ; j++ ){
 
+
+
       if(plateau.plateau[i][j]==1){ // Si case du plateau = 1
         let butn = document.createElement("button");
         butn.className = "BoutonDuPlateau";
-        butn.innerHTML = "1";
+        butn.innerHTML = " ";
         divplateau.appendChild(butn);
       }
 
@@ -37,25 +39,25 @@ function createPlateauButtons() {
     divplateau.appendChild(document.createElement('br')); // retours à la ligne
   }
 
-/*
-Fait buguer le navigateur :
   let launchgame = document.getElementsByClassName('BoutonDuPlateau');
   console.log(launchgame);
 
-  for (var i = 0; i < 10; i++) {
-    launchgame[i].addEventListener("click",PlayerTurn());
+  for (let i = 0; i < launchgame.length; i++) {
+    launchgame.item(i).addEventListener("click",PlayerTurn);
   }
-  */
 }
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
-function PlayerTurn() {
+function PlayerTurn(pBlue, pRed) {
+
   let username = getPseudo();
 
   let isfinished = false;
   let turncount = 0;
 
-  while (isfinished==false){
+  console.log("PlayerTurn() appelé");
+
+  while (isfinished!=false){
     turncount++;
     console.log(turncount);
     if(PlayerRed.pionsJoueur[33].isTaken()==true || PlayerBlue.pionsJoueur[33].isTaken()==true){
