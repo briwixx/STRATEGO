@@ -5,14 +5,14 @@ let psdo = document.getElementById('pseudoquery').value;
 return psdo;
 }
 
-//Bouton start qui déclenche la fonction en dessous et récupère le pseudo
+//Bouton start qui déclenche createPlateauButtons en dessous et récupère le pseudo
 let startbutton = document.createElement("button")
 startbutton.innerHTML = "Start game !"
 document.body.appendChild(startbutton);
 startbutton.addEventListener("click",createPlateauButtons);
 startbutton.onclick = getPseudo;
 
-//crée boutons + ou - en fonction du plateau créé (classPlateau.js)
+//crée boutons 1 ou 0 en fonction du plateau créé (classPlateau.js)
 function createPlateauButtons() {
   startbutton.remove(); // Supprime le bouton start game au lancement de la partie
 
@@ -22,8 +22,6 @@ function createPlateauButtons() {
   let divplateau = document.getElementById('plateauJeu'); //Place le plateau dans la divplateau
   for (let i = 0 ; i < 10 ; i++){
     for (let j = 0 ; j < 10 ; j++ ){
-
-
 
       if(plateau.plateau[i][j]==1){ // Si case du plateau = 1
         let butn = document.createElement("button");
@@ -51,7 +49,7 @@ function createPlateauButtons() {
 }
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
-function PlayerTurn(pBlue, pRed) {
+function PlayerTurn() {
 
   let username = getPseudo();
 

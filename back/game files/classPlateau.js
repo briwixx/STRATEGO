@@ -29,3 +29,7 @@ class Plateau {
   }
 }
 let plateau = new Plateau(10,10);
+
+function PlacementPion(pion) {
+  console.log("PlacementPion() appelé");
+}

@@ -40,7 +40,7 @@ let PlayerBlue = new Joueur();
 
 
 
-// Affichage des pions de chaque joueur sous le plateau :
+// Affichage des pions de chaque joueur sous le plateau et listener click:
 let divpions = document.getElementById('pionsPlayer');
 
 function genPionsButtons(){
@@ -48,20 +48,28 @@ function genPionsButtons(){
   let msgred = document.createElement("p");
   msgred.textContent = "Pions du joueur Rouge :"
   divpions.appendChild(msgred);
+
   for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
     let butnPion = document.createElement("button");
     butnPion.className = "BoutonPion";
     butnPion.innerHTML = PlayerRed.pionsJoueur[i].name;
     divpions.appendChild(butnPion);
+
+    //Attach fonction PlacementPion sur les boutons
+    butnPion.addEventListener("click",PlacementPion(PlayerRed.pionsJoueur[i])); //s'appelle a la generation quand ilya un param ???
   }
 
   let msgblu = document.createElement("p");
   msgblu.textContent = "Pions du joueur Bleu :"
   divpions.appendChild(msgblu);
+
   for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
     let butnPion = document.createElement("button");
     butnPion.className = "BoutonPion";
     butnPion.innerHTML = PlayerBlue.pionsJoueur[i].name;
     divpions.appendChild(butnPion);
+
+    //Attach fonction PlacementPion sur les boutons
+    butnPion.addEventListener("click",PlacementPion(PlayerBlue.pionsJoueur[i]));
   }
 }
