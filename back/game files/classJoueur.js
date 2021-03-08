@@ -70,6 +70,6 @@ function genPionsButtons(){
     divpions.appendChild(butnPion);
 
     //Attach fonction PlacementPion sur les boutons
-    butnPion.addEventListener("click",PlacementPion(PlayerBlue.pionsJoueur[i]));
+    butnPion.addEventListener("click",PlacementPion);
   }
 }
