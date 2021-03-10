@@ -12,12 +12,17 @@ document.body.appendChild(startbutton);
 startbutton.addEventListener("click",createPlateauButtons);
 startbutton.onclick = getPseudo;
 
+
 //crée boutons 1 ou 0 en fonction du plateau créé (classPlateau.js)
 function createPlateauButtons() {
   startbutton.remove(); // Supprime le bouton start game au lancement de la partie
 
+  let champpsdo = document.getElementById('pseudoquery');
+  champpsdo.remove();// suppr le champ saisie pseudo
+
   //Appel fonction qui affiche les pions des joueurs :
   genPionsButtons();
+  AttachEvent();
 
   let divplateau = document.getElementById('plateauJeu'); //Place le plateau dans la divplateau
   for (let i = 0 ; i < 10 ; i++){
@@ -26,6 +31,7 @@ function createPlateauButtons() {
       if(plateau.plateau[i][j]==1){ // Si case du plateau = 1
         let butn = document.createElement("button");
         butn.className = "BoutonDuPlateau";
+        butn.setAttribute('id', 'case ['+i+']['+j+']')
         butn.innerHTML = "1";
         divplateau.appendChild(butn);
       }
@@ -33,6 +39,7 @@ function createPlateauButtons() {
       else if (plateau.plateau[i][j]==0){ // Si case du plateau = 0 (lac)
         let butnlac = document.createElement("button");
         butnlac.className = "BoutonDuPlateau";
+        butnlac.setAttribute('id', 'case ['+i+']['+j+']');
         butnlac.innerHTML = "0";
         divplateau.appendChild(butnlac);
       }

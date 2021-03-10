@@ -33,6 +33,17 @@ class Joueur {
       this.pionsJoueur[i] = new Bombes();
     }
   }
+  PlacementPion(pion) {
+      return function(){
+      console.log(pion.name + " selected");
+
+      let caseSelected = getElementById;
+      caseSelected.addEventListener("click",function(){
+
+        }
+      );
+    };
+  }
 }
 
 let PlayerRed = new Joueur();
@@ -52,11 +63,9 @@ function genPionsButtons(){
   for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
     let butnPion = document.createElement("button");
     butnPion.className = "BoutonPion";
+    butnPion.setAttribute('id','red'+i); // attribue un id propre au pion
     butnPion.innerHTML = PlayerRed.pionsJoueur[i].name;
     divpions.appendChild(butnPion);
-
-    //Attach fonction PlacementPion sur les boutons
-    butnPion.addEventListener("click",PlacementPion(PlayerRed.pionsJoueur[i])); //s'appelle a la generation quand ilya un param ???
   }
 
   let msgblu = document.createElement("p");
@@ -66,10 +75,22 @@ function genPionsButtons(){
   for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
     let butnPion = document.createElement("button");
     butnPion.className = "BoutonPion";
+    butnPion.setAttribute('id','blue'+i); // attribue un id propre au pion
     butnPion.innerHTML = PlayerBlue.pionsJoueur[i].name;
     divpions.appendChild(butnPion);
+  }
+}
 
-    //Attach fonction PlacementPion sur les boutons
-    butnPion.addEventListener("click",PlacementPion);
+function AttachEvent(){
+  let button;
+    //Attache fonction PlacementPion sur les boutons
+  for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
+    button = document.getElementById('red'+i);
+    button.addEventListener("click",PlayerRed.PlacementPion(PlayerRed.pionsJoueur[i]));
+  }
+
+  for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
+    button = document.getElementById('blue'+i);
+    button.addEventListener("click",PlayerBlue.PlacementPion(PlayerBlue.pionsJoueur[i]));
   }
 }

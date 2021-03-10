@@ -8,16 +8,11 @@ class Pion {
     this.posX = posX;
     this.posY = posY;
   }
-
-  captureDrapeau(){
-    //fin de partie
-  }
 }
 
 class MovablePion extends Pion {
   constructor(name) {
-    super();
-    this.name = name;
+    super(name);
   }
   Avancer(nbCasesX,nbCasesY,plateau){ // Bombes et Drapeau peuvent pas bouger, Eclaireur que en avant
     if(plateau[nbCasesX][nbCasesY]==1){
