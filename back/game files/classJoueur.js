@@ -33,18 +33,18 @@ class Joueur {
       this.pionsJoueur[i] = new Bombes();
     }
   }
+
   PlacementPion(pion) {
       return function(){
       console.log(pion.name + " selected");
 
-      let caseSelected = getElementById;
-      caseSelected.addEventListener("click",function(){
+    //  let caseSelected = getElementById;
+      //caseSelected.addEventListener("click",function(){
 
-        }
-      );
-    };
+      };
+    //  );
+    }
   }
-}
 
 let PlayerRed = new Joueur();
 let PlayerBlue = new Joueur();

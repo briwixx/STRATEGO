@@ -16,9 +16,10 @@ startbutton.onclick = getPseudo;
 //crée boutons 1 ou 0 en fonction du plateau créé (classPlateau.js)
 function createPlateauButtons() {
   startbutton.remove(); // Supprime le bouton start game au lancement de la partie
-
+  let pseudoJoueur  = getPseudo();
+  console.log("Pseudo du joueur : " + pseudoJoueur);
   let champpsdo = document.getElementById('pseudoquery');
-  champpsdo.remove();// suppr le champ saisie pseudo
+  //champpsdo.remove();// suppr le champ saisie pseudo
 
   //Appel fonction qui affiche les pions des joueurs :
   genPionsButtons();
