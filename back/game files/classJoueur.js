@@ -34,15 +34,27 @@ class Joueur {
     }
   }
 
-  PlacementPion(pion) {
+  PlacementPion(pion, plateau) {
       return function(){
       console.log(pion.name + " selected");
 
-    //  let caseSelected = getElementById;
-      //caseSelected.addEventListener("click",function(){
+      let launchgame = document.getElementsByClassName('BoutonDuPlateau');
+      console.log(launchgame.length);
+      for (let i = 0; i < launchgame.length; i++) {
+
+        launchgame.item(i).addEventListener("click",function(){
+          launchgame.item(i).innerHTML = pion.name;
+
+          let newPion = document.createElement('button');
+          newPion.setAttribute('id',pion.name);
+          divpions.appendChild(newPion);
+          console.log(pion.name + " placé sur la case " + newPion);
+        }
+      );
+
+      }
 
       };
-    //  );
     }
   }
 
@@ -86,7 +98,7 @@ function AttachEvent(){
     //Attache fonction PlacementPion sur les boutons
   for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
     button = document.getElementById('red'+i);
-    button.addEventListener("click",PlayerRed.PlacementPion(PlayerRed.pionsJoueur[i]));
+    button.addEventListener("click",PlayerRed.PlacementPion(PlayerRed.pionsJoueur[i],plateau));
   }
 
   for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {

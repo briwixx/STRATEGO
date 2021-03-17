@@ -9,12 +9,10 @@ return psdo;
 let startbutton = document.createElement("button")
 startbutton.innerHTML = "Start game !"
 document.body.appendChild(startbutton);
-startbutton.addEventListener("click",createPlateauButtons);
+startbutton.addEventListener("click",LaunchingGame);
 startbutton.onclick = getPseudo;
 
-
-//crée boutons 1 ou 0 en fonction du plateau créé (classPlateau.js)
-function createPlateauButtons() {
+function LaunchingGame(){
   startbutton.remove(); // Supprime le bouton start game au lancement de la partie
   let pseudoJoueur  = getPseudo();
   console.log("Pseudo du joueur : " + pseudoJoueur);
@@ -24,6 +22,11 @@ function createPlateauButtons() {
   //Appel fonction qui affiche les pions des joueurs :
   genPionsButtons();
   AttachEvent();
+  createPlateauButtons();
+}
+
+//crée boutons 1 ou 0 en fonction du plateau créé (classPlateau.js)
+function createPlateauButtons(boutonJoueuraPlacer) {
 
   let divplateau = document.getElementById('plateauJeu'); //Place le plateau dans la divplateau
   for (let i = 0 ; i < 10 ; i++){
@@ -32,15 +35,15 @@ function createPlateauButtons() {
       if(plateau.plateau[i][j]==1){ // Si case du plateau = 1
         let butn = document.createElement("button");
         butn.className = "BoutonDuPlateau";
-        butn.setAttribute('id', 'case ['+i+']['+j+']')
-        butn.innerHTML = "1";
+        butn.setAttribute('id',i+''+j)
+        butn.innerHTML =1;
         divplateau.appendChild(butn);
       }
 
       else if (plateau.plateau[i][j]==0){ // Si case du plateau = 0 (lac)
         let butnlac = document.createElement("button");
         butnlac.className = "BoutonDuPlateau";
-        butnlac.setAttribute('id', 'case ['+i+']['+j+']');
+        butnlac.setAttribute('id',i+''+j);
         butnlac.innerHTML = "0";
         divplateau.appendChild(butnlac);
       }
@@ -49,11 +52,7 @@ function createPlateauButtons() {
     divplateau.appendChild(document.createElement('br')); // retours à la ligne
   }
 
-  let launchgame = document.getElementsByClassName('BoutonDuPlateau');
 
-  for (let i = 0; i < launchgame.length; i++) {
-    launchgame.item(i).addEventListener("click",PlayerTurn);
-  }
 }
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
