@@ -1,6 +1,7 @@
 class Plateau {
   constructor(lignes,colonnes) {
-
+    this.check1 = false;
+    this.check2 = false;
     this.lignes = lignes;
     this.colonnes = colonnes;
 

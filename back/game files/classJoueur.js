@@ -39,16 +39,23 @@ class Joueur {
       console.log(pion.name + " selected");
 
       let launchgame = document.getElementsByClassName('BoutonDuPlateau');
-      console.log(launchgame.length);
+
       for (let i = 0; i < launchgame.length; i++) {
 
         launchgame.item(i).addEventListener("click",function(){
-          launchgame.item(i).innerHTML = pion.name;
 
-          let newPion = document.createElement('button');
-          newPion.setAttribute('id',pion.name);
-          divpions.appendChild(newPion);
-          console.log(pion.name + " placé sur la case " + newPion);
+          let caseTmp = document.getElementById(i);
+          let idtmp = caseTmp.getAttribute('id');
+
+          idtmp = parseInt(idtmp);
+          let iTmp = Math.trunc(idtmp/10);
+          let jTmp = idtmp%10;
+
+          plateau.plateau[iTmp][jTmp] = pion.name;
+
+//          createPlateauButtons(pion,iTmp,jTmp);
+
+          console.log(pion.name + " placé sur la case " );
         }
       );
 

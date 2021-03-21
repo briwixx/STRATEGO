@@ -40,12 +40,22 @@ function createPlateauButtons(boutonJoueuraPlacer) {
         divplateau.appendChild(butn);
       }
 
-      else if (plateau.plateau[i][j]==0){ // Si case du plateau = 0 (lac)
+      if (plateau.plateau[i][j]==0){ // Si case du plateau = 0 (lac)
         let butnlac = document.createElement("button");
         butnlac.className = "BoutonDuPlateau";
         butnlac.setAttribute('id',i+''+j);
         butnlac.innerHTML = "0";
         divplateau.appendChild(butnlac);
+      }
+
+
+      //A faire dans une fonction a part :
+      else if(plateau.plateau[i][j]!=0 && plateau.plateau[i][j]!=1){
+        let butnn = document.createElement("button");
+        butnn.className = "BoutonDuPlateau";
+        butnn.setAttribute('id',i+''+j);
+        butnn.innerHTML = boutonJoueuraPlacer.name;
+        divplateau.appendChild(butnn);
       }
 
     }
