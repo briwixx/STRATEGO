@@ -31,10 +31,7 @@ function LaunchingGame(){
 }
 
 //crée boutons 1 ou 0 en fonction du plateau créé (classPlateau.js)
-function createPlateauButtons(boutonJoueuraPlacer,iP,jP,color) {
-  let createPL = document.createElement('div')
-  createPL.id = 'plateauJeu';
-  document.body.appendChild(createPL);
+function createPlateauButtons() {
   let divplateau = document.getElementById('plateauJeu');
   for (let i = 0 ; i < 10 ; i++){
     for (let j = 0 ; j < 10 ; j++ ){
