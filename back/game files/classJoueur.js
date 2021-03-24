@@ -34,7 +34,7 @@ class Joueur {
     }
   }
 
-  PlacementPion(pion, plateau) {
+  PlacementPion(pion, plateau, color) {
       return function(){
       console.log(pion.name + " selected");
 
@@ -45,17 +45,25 @@ class Joueur {
         launchgame.item(i).addEventListener("click",function(){
 
           let caseTmp = document.getElementById(i);
-          let idtmp = caseTmp.getAttribute('id');
 
+
+          let idtmp = caseTmp.getAttribute('id');
           idtmp = parseInt(idtmp);
+
           let iTmp = Math.trunc(idtmp/10);
           let jTmp = idtmp%10;
 
-          plateau.plateau[iTmp][jTmp] = pion.name;
+        if(plateau.plateau[iTmp][jTmp] !=0){
+          plateau.plateau[iTmp][jTmp] = pion;
+          caseTmp.innerHTML = pion.name.fontcolor(color);
+          console.log(pion.name + " placé sur la case du plateau (" + iTmp + "," + jTmp + ")" );
+          console.log(plateau.plateau);
+        }
+        else {
+          console.log("Vous ne pouvez pas placer votre pion dans un lac")
+        }
+      
 
-//          createPlateauButtons(pion,iTmp,jTmp);
-
-          console.log(pion.name + " placé sur la case " );
         }
       );
 
@@ -100,16 +108,16 @@ function genPionsButtons(){
   }
 }
 
-function AttachEvent(){
+function AttachEvent(plateau){
   let button;
     //Attache fonction PlacementPion sur les boutons
   for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
     button = document.getElementById('red'+i);
-    button.addEventListener("click",PlayerRed.PlacementPion(PlayerRed.pionsJoueur[i],plateau));
+    button.addEventListener("click",PlayerRed.PlacementPion(PlayerRed.pionsJoueur[i],plateau,'red'));
   }
 
   for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
     button = document.getElementById('blue'+i);
-    button.addEventListener("click",PlayerBlue.PlacementPion(PlayerBlue.pionsJoueur[i]));
+    button.addEventListener("click",PlayerBlue.PlacementPion(PlayerBlue.pionsJoueur[i],plateau,'blue'));
   }
 }
