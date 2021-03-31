@@ -57,30 +57,6 @@ function createPlateauButtons() {
         divplateau.appendChild(butnlac);
       }
 
-/*
-      else if(plateau.plateau[i][j]!=0 && plateau.plateau[i][j]!=1){
-        let butnn = document.createElement("button");
-
-        //Nom du pion à afficher sur le plateau avec sa couleur:
-        let strColor = boutonJoueuraPlacer.name.fontcolor(color);
-        butnn.className = "BoutonDuPlateau";
-
-        if(iP==0){
-        butnn.setAttribute('id',jP);
-        }
-        else{
-          butnn.setAttribute('id',iP+''+jP)
-        }
-
-        butnn.innerHTML = strColor;
-        butnn.style.color = color;
-        divplateau.appendChild(butnn);
-
-        //Supprimer le bouton Pion placé dans la liste du joueur :
-        //boutonJoueuraPlacer.remove();
-
-      }*/
-
     }
     divplateau.appendChild(document.createElement('br')); // retours à la ligne
   }
