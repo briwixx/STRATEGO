@@ -74,8 +74,8 @@ class Joueur {
         if(listPionsAPlacer.length==0){
           //Appel lancement partie :
 
-            PlayerTurn(player,color);
-        
+            PlayerTurn(PlayerRed,'red');
+
         }
 
       };

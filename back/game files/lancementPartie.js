@@ -75,7 +75,7 @@ function PlayerTurn(Player,color) {
 
 // Afficher tab placer bon event
   if (gameIsFinished!=true){
-    if(turnIsFinished != false){
+    if(turnIsFinished != true){
       if(PlayerRed.pionsJoueur[33].isTaken()==true){
         gameIsFinished = true;
         winner = username_j1;
@@ -84,31 +84,32 @@ function PlayerTurn(Player,color) {
         gameIsFinished = true;
         winner = username_j2;
       }
-      // Tour du j1
-      else if(turncount % 2 == 0){
-        console.log("Player 1");
-        HideOponent(playerRedOrBlue);
-        turncount++;
-      }
-      // Tour du j2
-      else if(turncount % 2 == 1){
-        console.log("Player 2;")
 
-        turncount++;
+      //GET LE PION A FAIRE AVANCER
+      let pion = 0;
+
+      //Recursivité en fonction du joueur qui joue
+      if(color =='blue'){
+        HideOponent(PlayerRed);
+        pion.Avancer();
+        PlayerTurn(PlayerRed,'red');
+
       }
+      else if (color == 'red') {
+        HideOponent(PlayerBlue);
+        pion.Avancer();
+        PlayerTurn(PlayerBlue,'blue');
+      }
+
     }
   }
   else{
     console.log("Partie terminée");
   }
 
-  if(color =='blue'){
-    PlayerTurn(PlayerRed,'red');
-  }
-  else if (color== 'red') {
-    PLayerTurn(PlayerBlue,'blue');
-  }
+
 }
+
 
 function HideOponent(player){
 
