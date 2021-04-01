@@ -61,22 +61,22 @@ class Joueur {
         else {
           console.log("Vous ne pouvez pas placer votre pion dans un lac")
           }
+
+        let listPionsAPlacer = document.getElementsByClassName('BoutonPion');
+          if(listPionsAPlacer.length==0){
+            //Appel lancement partie :
+
+              PlayerTurn(PlayerRed,'red');
+
+          }
         }
       );
 
       }
-
+      //Suppression de la liste pion placé
         let pionARemove = document.getElementById(color+j.toString());
         console.log(pionARemove);
         pionARemove.remove();
-
-        let listPionsAPlacer = document.getElementsByClassName('BoutonPion');
-        if(listPionsAPlacer.length==0){
-          //Appel lancement partie :
-
-            PlayerTurn(PlayerRed,'red');
-
-        }
 
       };
     }
