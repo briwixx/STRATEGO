@@ -51,14 +51,28 @@ class Joueur {
           let iTmp = IDs.i;
           let jTmp = IDs.j;
 
-        if(plateau.plateau[iTmp][jTmp] != 0){
-          plateau.plateau[iTmp][jTmp] = pion;
-          caseTmp.innerHTML = pion.name.fontcolor(color);
-          console.log(pion.name + " placé sur la case du plateau (" + iTmp + "," + jTmp + ")" );
-          console.log(plateau.plateau);
-        }
-        else {
-          console.log("Vous ne pouvez pas placer votre pion dans un lac")
+        if (color == 'red'){
+          if(plateau.plateau[iTmp][jTmp] != 0 && iTmp >= 5){ //Le joueur rouge peut placer que en bas du plateau
+            plateau.plateau[iTmp][jTmp] = pion;
+            caseTmp.innerHTML = pion.name.fontcolor(color);
+            console.log(pion.name + " placé sur la case du plateau (" + iTmp + "," + jTmp + ")" );
+            console.log(plateau.plateau);
+          }
+          else {
+            console.log("Vous ne pouvez pas placer votre ici");
+            }
+          }
+
+          else if (color == 'blue'){
+            if(plateau.plateau[iTmp][jTmp] != 0 && iTmp < 5){ //Le joueur bleu peut placer que en haut du plateau
+              plateau.plateau[iTmp][jTmp] = pion;
+              caseTmp.innerHTML = pion.name.fontcolor(color);
+              console.log(pion.name + " placé sur la case du plateau (" + iTmp + "," + jTmp + ")" );
+              console.log(plateau.plateau);
+            }
+            else {
+              console.log("Vous ne pouvez pas placer votre pion ici");
+            }
           }
         }
       );
@@ -70,15 +84,14 @@ class Joueur {
         pionARemove.remove();
 
         let listPionsAPlacer = document.getElementsByClassName('BoutonPion');
+
         if(listPionsAPlacer.length==0){
-          //Appel lancement partie :
-
-            PlayerTurn(PlayerRed,'red');
-
+          //Appel lancement partie quand les pions sont placés :
+        PlayerTurn(PlayerRed,'red');
         }
 
       };
-    }
+    }//fin PlacementPion
   }
 
 let PlayerRed = new Joueur();
