@@ -46,11 +46,10 @@ class Joueur {
 
           let caseTmp = document.getElementById(i);
 
-          let idtmp = caseTmp.getAttribute('id');
-          idtmp = parseInt(idtmp);
+          let IDs = GetIdOfClickedButton(caseTmp);
 
-          let iTmp = Math.trunc(idtmp/10);
-          let jTmp = idtmp%10;
+          let iTmp = IDs.i;
+          let jTmp = IDs.j;
 
         if(plateau.plateau[iTmp][jTmp] != 0){
           plateau.plateau[iTmp][jTmp] = pion;
@@ -85,7 +84,21 @@ class Joueur {
 let PlayerRed = new Joueur();
 let PlayerBlue = new Joueur();
 
+function GetIdOfClickedButton(button){
+  let idtmp = button.getAttribute('id');
 
+  idtmp = parseInt(idtmp);
+  let iTmp = Math.trunc(idtmp/10);
+  let jTmp = idtmp%10;
+
+  return{
+    i : iTmp,
+    j : jTmp
+  };
+  //Exemple accès aux éléments : let test = GetIdOfClickedButton(button);
+  //                             let i = test.i;
+  //                             let j =test.j;
+}
 
 // Affichage des pions de chaque joueur sous le plateau et listener click:
 let divpions = document.getElementById('pionsPlayer');
