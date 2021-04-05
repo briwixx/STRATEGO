@@ -108,7 +108,7 @@ PlacementPion(pion, j, plateau, color) {
 
 let PlayerRed = new Joueur();
 let PlayerBlue = new Joueur();
-
+let date = new Date();
 function AttachEvent(plateau) {
 let button;
 // Sur chaque pion du joueur, j'ajoute un onclick() lancant la fonction PlacementPion, en lui envoyant le nom du pion, son index, le plateau, et la couleur du joueur
@@ -124,8 +124,8 @@ for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
 }
 
 let divpions = document.getElementById('pionsPlayer');
-function genPionsButtons() {
 
+function genPionsButtons() {
 let msgred = document.createElement("p");
 msgred.textContent = "Pions du joueur Rouge :"
 divpions.appendChild(msgred);
@@ -197,14 +197,23 @@ if (bluePions.length > 0) {
       btn.style.color = "red";
     }
     //Lancement partie pour le joueur rouge
-    alert("Tous les pions sont placés, lancement de la partie.");
-    PlayerTurn(PlayerRed,'red');
+
+    PlayerRed.chrono_Start = {
+      heure: ('0' + date.getHours()).slice(-2),
+      minute: ('0' + date.getMinutes()).slice(-2),
+      seconde: ('0' + date.getSeconds()).slice(-2)
+    };
+        alert("Tous les pions sont placés, lancement de la partie.");
+        PlayerTurn(PlayerRed, 'red');
+
+      }
+      ;
   // Sinon ( si le rouge n'a pas tout posé (0<nbpionrouge<40))
   } else {
     alert("Le joueur rouge n'a pas posé tous ses pions.");
   }
 }
-}
+
 
 
 function GetIdOfClickedButton(button){

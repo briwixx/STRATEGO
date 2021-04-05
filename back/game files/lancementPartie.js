@@ -86,11 +86,22 @@ function PlayerTurn(Player) {
 
       //GET LE PION A FAIRE AVANCER
       let pion = 0;
-
+      let i = 0;
+      let listenerButtns = document.getElementsByClassName('BoutonDuPlateau');
+      for(let i = 0 ; i<listenerButtns.length ; i++){
+      listenerButtns.item(i).addEventListener('click',
+          function(){
+            pion = document.getElementById(i.toString());
+            let varID = GetIdOfClickedButton(pion);//Recupère l'indice i et j du pion dans le plateau
+            i = varID.i;
+            j = varID.j;
+          }
+      );
+      }
       //Recursivité en fonction du joueur qui joue
       if(color =='blue'){
         HideOponent('red');
-        pion.Avancer();
+        Player.pionsJoueur[i].Avancer(plateau.plateau);
         PlayerTurn(PlayerRed,'red');
 
       }
@@ -105,8 +116,6 @@ function PlayerTurn(Player) {
   else{
     console.log("Partie terminée");
   }
-
-
 }
 
 
