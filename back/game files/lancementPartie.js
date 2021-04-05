@@ -63,26 +63,25 @@ function createPlateauButtons() {
 }
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
-function PlayerTurn(Player,color) {
-  console.log("PlayerTurn() appelé");
+function PlayerTurn(Player) {
+  alert("C'est au joueur " + color + "de jouer");
 
-  let username_j1 = Player.getPseudo();
-  //let username_j2 = Player2.getPseudo();
-  let winner;
+  let username = Player.pseudo;
   let turnIsFinished = false;
   let gameIsFinished = false;
-  let turncount = 0;
 
-// Afficher tab placer bon event
-  if (gameIsFinished!=true){
-    if(turnIsFinished != true){
-      if(PlayerRed.pionsJoueur[33].isTaken()==true){
+  /* AFFICHER PSEUDO DU JOUEUR QUI JOUE */
+  document.write("<h2> <script>Player.pseudo</script> </h2>");
+
+  let winner;
+  if (gameIsFinished != true) {
+    if (turnIsFinished != true) {
+      if (PlayerRed.pionsJoueur[33].isTaken()) {
         gameIsFinished = true;
-        winner = username_j1;
-      }
-      else if(PlayerBlue.pionsJoueur[33].isTaken()==true){
+        return winner = username;
+      } else if (PlayerBlue.pionsJoueur[33].isTaken()) {
         gameIsFinished = true;
-        winner = username_j2;
+        return winner = username;
       }
 
       //GET LE PION A FAIRE AVANCER
@@ -90,13 +89,13 @@ function PlayerTurn(Player,color) {
 
       //Recursivité en fonction du joueur qui joue
       if(color =='blue'){
-        HideOponent(PlayerRed);
+        HideOponent('red');
         pion.Avancer();
         PlayerTurn(PlayerRed,'red');
 
       }
       else if (color == 'red') {
-        HideOponent(PlayerBlue);
+        HideOponent('blue');
         pion.Avancer();
         PlayerTurn(PlayerBlue,'blue');
       }
@@ -111,6 +110,30 @@ function PlayerTurn(Player,color) {
 }
 
 
-function HideOponent(player){
+function HideOponent(color){
+  // Je récupère tous les boutons du plateau, j'assigne les 40 premiers au rouge, et les 40 derniers au bleu
+  let btnPlateau = document.getElementsByClassName("BoutonDuPlateau");
+  let redBtn = [];
+  let blueBtn = [];
+  for (let btn of btnPlateau) {
+    if (btn.id > 0 && btn.id < 40) {
+      redBtn.push(btn)
+    } else if (btn.id < 100 && btn.id > 59) {
+      blueBtn.push(btn)
+    }
+  }
 
+if(color == 'blue'){
+  for (let btn of blueBtn) {
+    btn.childNodes[0].color = "#EFEFEF";
+    btn.style.color = "#EFEFEF";
+  }
+}
+
+else if(color=='red'){
+  for (let btn of redBtn) {
+    btn.childNodes[0].color = "#EFEFEF";
+    btn.style.color = "#EFEFEF";
+  }
+}
 }
