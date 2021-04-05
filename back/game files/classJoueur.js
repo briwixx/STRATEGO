@@ -33,6 +33,7 @@ constructor() {
   for (let i = 34; i < 40; i++) {
     this.pionsJoueur[i] = new Bombes();
   }
+  this.pseudo = 'none';
 }
 PlacementPion(pion, j, plateau, color) {
   return function () {
@@ -134,7 +135,7 @@ for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
   let butnPion = document.createElement("button");
   butnPion.className = "BoutonPion redbtn";
   butnPion.setAttribute('id', 'red' + i); // attribue un id propre au pion
-  butnPion.innerHTML = PlayerRed.pionsJoueur[i].name;
+  butnPion.innerHTML = PlayerRed.pionsJoueur[i].type;
   divpions.appendChild(butnPion);
 }
 
@@ -146,7 +147,7 @@ for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
   let butnPion = document.createElement("button");
   butnPion.className = "BoutonPion bluebtn";
   butnPion.setAttribute('id', 'blue' + i); // attribue un id propre au pion
-  butnPion.innerHTML = PlayerBlue.pionsJoueur[i].name;
+  butnPion.innerHTML = PlayerBlue.pionsJoueur[i].type;
   divpions.appendChild(butnPion);
 }
 

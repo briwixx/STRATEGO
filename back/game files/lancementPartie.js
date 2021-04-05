@@ -72,7 +72,7 @@ function PlayerTurn(Player,color) {
   let gameIsFinished = false;
 
   /* AFFICHER PSEUDO DU JOUEUR QUI JOUE */
-  document.write("<h2> <script>Player.pseudo</script> </h2>");
+  //document.write("<h2> <script>Player.pseudo</script> </h2>");
 
   let winner;
   if (gameIsFinished != true) {
