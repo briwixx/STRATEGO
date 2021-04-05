@@ -63,26 +63,25 @@ function createPlateauButtons() {
 }
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
-function PlayerTurn(Player,color) {
+function PlayerTurn(Player) {
   alert("C'est au joueur " + color + "de jouer");
 
-  let username_j1 = Player.getPseudo();
-  //let username_j2 = Player2.getPseudo();
-  let winner;
+  let username = Player.pseudo;
   let turnIsFinished = false;
   let gameIsFinished = false;
-  let turncount = 0;
 
-// Afficher tab placer bon event
-  if (gameIsFinished!=true){
-    if(turnIsFinished != true){
-      if(PlayerRed.pionsJoueur[33].isTaken()==true){
+  /* AFFICHER PSEUDO DU JOUEUR QUI JOUE */
+  document.write("<h2> <script>Player.pseudo</script> </h2>");
+
+  let winner;
+  if (gameIsFinished != true) {
+    if (turnIsFinished != true) {
+      if (PlayerRed.pionsJoueur[33].isTaken()) {
         gameIsFinished = true;
-        winner = username_j1;
-      }
-      else if(PlayerBlue.pionsJoueur[33].isTaken()==true){
+        return winner = username;
+      } else if (PlayerBlue.pionsJoueur[33].isTaken()) {
         gameIsFinished = true;
-        winner = username_j2;
+        return winner = username;
       }
 
       //GET LE PION A FAIRE AVANCER
