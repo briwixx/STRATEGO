@@ -64,7 +64,7 @@ function createPlateauButtons() {
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
 function PlayerTurn(Player,color) {
-  console.log("PlayerTurn() appelé");
+  alert("C'est au joueur " + color + "de jouer");
 
   let username_j1 = Player.getPseudo();
   //let username_j2 = Player2.getPseudo();
@@ -90,13 +90,13 @@ function PlayerTurn(Player,color) {
 
       //Recursivité en fonction du joueur qui joue
       if(color =='blue'){
-        HideOponent(PlayerRed);
+        HideOponent('red');
         pion.Avancer();
         PlayerTurn(PlayerRed,'red');
 
       }
       else if (color == 'red') {
-        HideOponent(PlayerBlue);
+        HideOponent('blue');
         pion.Avancer();
         PlayerTurn(PlayerBlue,'blue');
       }
@@ -111,6 +111,30 @@ function PlayerTurn(Player,color) {
 }
 
 
-function HideOponent(player){
+function HideOponent(color){
+  // Je récupère tous les boutons du plateau, j'assigne les 40 premiers au rouge, et les 40 derniers au bleu
+  let btnPlateau = document.getElementsByClassName("BoutonDuPlateau");
+  let redBtn = [];
+  let blueBtn = [];
+  for (let btn of btnPlateau) {
+    if (btn.id > 0 && btn.id < 40) {
+      redBtn.push(btn)
+    } else if (btn.id < 100 && btn.id > 59) {
+      blueBtn.push(btn)
+    }
+  }
 
+if(color == 'blue'){
+  for (let btn of blueBtn) {
+    btn.childNodes[0].color = "#EFEFEF";
+    btn.style.color = "#EFEFEF";
+  }
+}
+
+else if(color=='red'){
+  for (let btn of redBtn) {
+    btn.childNodes[0].color = "#EFEFEF";
+    btn.style.color = "#EFEFEF";
+  }
+}
 }
