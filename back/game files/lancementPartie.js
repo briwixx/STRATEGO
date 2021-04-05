@@ -45,7 +45,8 @@ function createPlateauButtons() {
         else{
           butn.setAttribute('id',i+''+j)
         }
-        butn.innerHTML =1;
+        butn.innerHTML = "";
+        butn.setAttribute("style","width: 100px; height: 100px;");
         divplateau.appendChild(butn);
       }
 
@@ -53,7 +54,7 @@ function createPlateauButtons() {
         let butnlac = document.createElement("button");
         butnlac.className = "BoutonDuPlateau";
         butnlac.setAttribute('id',i+''+j);
-        butnlac.innerHTML = "0";
+        butnlac.innerHTML = '<img src="../PionStratego/lac.jpg" />';
         divplateau.appendChild(butnlac);
       }
 
@@ -63,8 +64,8 @@ function createPlateauButtons() {
 }
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
-function PlayerTurn(Player) {
-  alert("C'est au joueur " + color + "de jouer");
+function PlayerTurn(Player,color) {
+  alert("C'est au joueur " + color + " de jouer");
 
   let username = Player.pseudo;
   let turnIsFinished = false;
@@ -84,37 +85,48 @@ function PlayerTurn(Player) {
         return winner = username;
       }
 
-      //GET LE PION A FAIRE AVANCER
-      let pion = 0;
-      let i = 0;
-      let listenerButtns = document.getElementsByClassName('BoutonDuPlateau');
-      for(let i = 0 ; i<listenerButtns.length ; i++){
-      listenerButtns.item(i).addEventListener('click',
-          function(){
-            pion = document.getElementById(i.toString());
-            let varID = GetIdOfClickedButton(pion);//Recupère l'indice i et j du pion dans le plateau
-            i = varID.i;
-            j = varID.j;
-          }
-      );
-      }
-      //Recursivité en fonction du joueur qui joue
-      if(color =='blue'){
-        HideOponent('red');
-        Player.pionsJoueur[i].Avancer(plateau.plateau);
-        PlayerTurn(PlayerRed,'red');
+  //GET LE PION A FAIRE AVANCER
+  let elmt = 0;
+  let elmt2 = 0;
+  let iDeb, jDeb, iFin, jFin;
+  let listenerButtns = document.getElementsByClassName('BoutonDuPlateau');
+  for(let i = 0 ; i < listenerButtns.length ; i++){
+    listenerButtns.item(i).addEventListener('click',
+      function(){
+        elmt = document.getElementById(i.toString());
+        let varID = GetIdOfClickedButton(pion);//Recupère l'indice i et j du pion dans le plateau
+        iDeb = varID.i;
+        jDeb = varID.j;
 
+        for(let j = 0 ; j < listenerButtns.length ; j++){
+          listenerButtns.item(j).addEventListener('click',
+            function(){
+              elmt2 = document.getElementById(j.toString());
+              let varID2 = GetIdOfClickedButton(pion);//Recupère l'indice i et j du pion dans le plateau
+              iFin = varID2.i;
+              jFin = varID2.j;
+              plateau.plateau[iDeb][jDeb].Avancer(iFin,jfin,pion);
+
+              //Recursivité en fonction du joueur qui joue
+              if(color =='red'){
+                HideOponent('blue');
+                PlayerTurn(PlayerRed,'red');
+              } else if (color == 'blue'){
+                HideOponent('red');
+                PlayerTurn(PlayerBlue,'blue');
+                }
+            }
+          );
+        }
       }
-      else if (color == 'red') {
-        HideOponent('blue');
-        pion.Avancer();
-        PlayerTurn(PlayerBlue,'blue');
-      }
+    );
+  }
+
 
     }
   }
   else{
-    console.log("Partie terminée");
+    alert("Partie terminée");
   }
 }
 

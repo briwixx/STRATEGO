@@ -44,7 +44,7 @@ PlacementPion(pion, j, plateau, color) {
 
     for (let i = 0; i < boardBtn.length; i++) {
       if (!boardBtn.item(i).children.length > 0) {
-        boardBtn.item(i).onclick = () => onclick(i)
+        boardBtn.item(i).onclick = () => onclick(i);
       }
     };
 
@@ -71,7 +71,7 @@ PlacementPion(pion, j, plateau, color) {
             // L'objet pion placé sur le plateau (backend)
             plateau.plateau[iTmp][jTmp] = pion;
             // J'écris le nom du pion sur la case (frontent)
-            caseTmp.innerHTML = pion.name.fontcolor(color);
+            caseTmp.innerHTML = pion.type;
             console.log(pion.name + " placé sur la case du plateau (" + iTmp + "," + jTmp + ")");
             // Je supprime le pion dans la main du joueur
             pion = null
@@ -90,7 +90,7 @@ PlacementPion(pion, j, plateau, color) {
         } else if (color === "red") {
           if (iTmp < 4) {
             plateau.plateau[iTmp][jTmp] = pion;
-            caseTmp.innerHTML = pion.name.fontcolor(color);
+            caseTmp.innerHTML = pion.type;
             console.log(pion.name + " placé sur la case du plateau (" + iTmp + "," + jTmp + ")");
             pion = null
             selectedPion.remove()
