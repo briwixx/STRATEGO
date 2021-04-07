@@ -1,40 +1,45 @@
-
 class Joueur {
-constructor() {
+constructor(color) {
   this.pionsJoueur = new Array(40);
 
-  this.pionsJoueur[0] = new Marechal();
-  this.pionsJoueur[1] = new General();
+  this.pionsJoueur[0] = new Marechal(color);
+  this.pionsJoueur[1] = new General(color);
 
   for (let i = 2; i < 4; i++) {
-    this.pionsJoueur[i] = new Colonels();
+    this.pionsJoueur[i] = new Colonels(color);
   }
   for (let i = 4; i < 7; i++) {
-    this.pionsJoueur[i] = new Commandants();
+    this.pionsJoueur[i] = new Commandants(color);
   }
   for (let i = 7; i < 11; i++) {
-    this.pionsJoueur[i] = new Capitaines();
+    this.pionsJoueur[i] = new Capitaines(color);
   }
   for (let i = 11; i < 15; i++) {
     this.pionsJoueur[i] = new Lieutenants;
   }
   for (let i = 15; i < 19; i++) {
-    this.pionsJoueur[i] = new Sergents();
+    this.pionsJoueur[i] = new Sergents(color);
   }
   for (let i = 19; i < 24; i++) {
-    this.pionsJoueur[i] = new Demineurs();
+    this.pionsJoueur[i] = new Demineurs(color);
   }
   for (let i = 24; i < 32; i++) {
-    this.pionsJoueur[i] = new Eclaireurs();
+    this.pionsJoueur[i] = new Eclaireurs(color);
   }
-  this.pionsJoueur[32] = new Espion();
-  this.pionsJoueur[33] = new Drapeau();
+  this.pionsJoueur[32] = new Espion(color);
+  this.pionsJoueur[33] = new Drapeau(color);
 
   for (let i = 34; i < 40; i++) {
-    this.pionsJoueur[i] = new Bombes();
+    this.pionsJoueur[i] = new Bombes(color);
   }
   this.pseudo = 'none';
+  this.chrono_Start = "";
 }
+
+set_pseudo(pseudo) {
+  this.pseudo = pseudo;
+}
+
 PlacementPion(pion, j, plateau, color) {
   return function () {
     console.log(pion.name + " selected");
@@ -107,9 +112,10 @@ PlacementPion(pion, j, plateau, color) {
 }
 }
 
-let PlayerRed = new Joueur();
-let PlayerBlue = new Joueur();
+let PlayerRed = new Joueur('red');
+let PlayerBlue = new Joueur('blue');
 let date = new Date();
+
 function AttachEvent(plateau) {
 let button;
 // Sur chaque pion du joueur, j'ajoute un onclick() lancant la fonction PlacementPion, en lui envoyant le nom du pion, son index, le plateau, et la couleur du joueur
@@ -124,38 +130,51 @@ for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
 }
 }
 
-let divpions = document.getElementById('pionsPlayer');
+let divpionsred = document.getElementById('pionsPlayerRed');
+let divpionsblue = document.getElementById('pionsPlayerBlue');
 
 function genPionsButtons() {
 let msgred = document.createElement("p");
 msgred.textContent = "Pions du joueur Rouge :"
-divpions.appendChild(msgred);
+divpionsred.appendChild(msgred);
 
 for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
   let butnPion = document.createElement("button");
   butnPion.className = "BoutonPion redbtn";
   butnPion.setAttribute('id', 'red' + i); // attribue un id propre au pion
   butnPion.innerHTML = PlayerRed.pionsJoueur[i].type;
-  divpions.appendChild(butnPion);
+  divpionsred.appendChild(butnPion);
 }
 
 let msgblu = document.createElement("p");
 msgblu.textContent = "Pions du joueur Bleu :"
-divpions.appendChild(msgblu);
+divpionsblue.appendChild(msgblu);
 
 for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
   let butnPion = document.createElement("button");
   butnPion.className = "BoutonPion bluebtn";
   butnPion.setAttribute('id', 'blue' + i); // attribue un id propre au pion
   butnPion.innerHTML = PlayerBlue.pionsJoueur[i].type;
-  divpions.appendChild(butnPion);
+  divpionsblue.appendChild(butnPion);
 }
 
 let btnValidate = document.createElement("button")
 btnValidate.innerHTML = "Valider mon tour"
 btnValidate.onclick = () => validateTurn()
 document.getElementById("buttons").appendChild(btnValidate)
+
+let btnRandomblue = createElement('button');
+btnRandom.innerHTML = "Placement Random Bleu";
+btnRandom.onclick = () => randomPlacement(PlayerBlue);
+document.getElementById("pionsPlayerBlue").appendChild(btnValidate);
+
+let btnRandomred = createElement('button');
+btnRandom.innerHTML = "Placement Random Red";
+btnRandom.onclick = () => randomPlacement(PlayerRed);
+document.getElementById("pionsPlayerRed").appendChild(btnValidate);
 }
+
+
 
 function validateTurn() {
 // Je récupère tous les boutons du plateau, j'assigne les 40 premiers au rouge, et les 40 derniers au bleu
@@ -205,8 +224,8 @@ if (bluePions.length > 0) {
       seconde: ('0' + date.getSeconds()).slice(-2)
     };
         alert("Tous les pions sont placés, lancement de la partie.");
-        PlayerTurn(PlayerRed, 'red');
-
+    //Appel lancement partie quand les pions sont placés :
+    PlayerTurn(PlayerRed, 'red');
       }
       ;
   // Sinon ( si le rouge n'a pas tout posé (0<nbpionrouge<40))
@@ -231,4 +250,14 @@ return{
 //Exemple accès aux éléments : let test = GetIdOfClickedButton(button);
 //                             let i = test.i;
 //                             let j =test.j;
+}
+
+
+function randomPlacement(player){
+  let count = 0
+  while (count < player.pionsJoueur.length){
+    let i = Math.random() * player.pionsJoueur.length;
+  player.PlacementPion(player.pionsJoueur[i], i, plateau, 'red');
+  count++;
+}
 }

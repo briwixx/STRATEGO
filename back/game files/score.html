@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Score</title>
+</head>
+<body>
+<script>
+    function $_GET(param) {
+        let vars = {};
+        window.location.href.replace( location.hash, '' ).replace(
+            /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+            function( m, key, value ) { // callback
+                vars[key] = value !== undefined ? value : '';
+            }
+        );
+
+        if ( param ) {
+            return vars[param] ? vars[param] : null;
+        }
+        return vars;
+    }
+    let pseudo = $_GET('name'), time_hour = $_GET('h'), time_min = $_GET('min'), time_sec = $_GET('sec');
+
+    /* ------------ AFFICHAGE DU PSEUDO DU GAGNANT ET DU TEMPS DE LA PARTIE ------------ */
+    document.write("Pseudo winner : "+pseudo+"<br><br>");
+    document.write("Temps de la partie : "+time_hour+"h"+time_min+"min"+time_sec+"sec");
+</script>
+</body>
+</html>

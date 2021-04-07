@@ -53,36 +53,13 @@ class MovablePion extends Pion {
           }
         }
     }
-
-    /*----------- MOOV ECLAIREUR -----------*/
-    if(this.name == 'eclaireur' && check_moove_eclaireur(plateau.plateau, nbCasesX, nbCasesY)){
-        // Fight de 2 éclaireurs OU Fight avec une bombe
-        if(plateau.plateau[nbCasesX][nbCasesY].name == 'eclaireur' || plateau.plateau[nbCasesX][nbCasesY].lvl == 30){
-          plateau.plateau[nbCasesX][nbCasesY] = 1;
-          plateau.plateau[this.posX][this.posY] = 1;
-        }
-        // L'éclaireur perd
-        else if(plateau.plateau[nbCasesX][nbCasesY].lvl > this.lvl && plateau.plateau[nbCasesX][nbCasesY].name != 'drapeau'){
-          plateau.plateau[this.posX][this.posY] = 1;
-        }
-        // L'éclaireur gagne (que contre l'espionne)
-        else if(plateau.plateau[nbCasesX][nbCasesY].name == 'espion'){
-          plateau.plateau[nbCasesX][nbCasesY] = plateau.plateau[this.posX][this.posY];
-          plateau.plateau[this.posX][this.posY] = 1;
-          this.posX = nbCasesX;
-          this.posY = nbCasesY;
-        }
-        // Il prend le drapeau
-        else if(plateau.plateau[nbCasesX][nbCasesY].name == 'drapeau'){
-          plateau.plateau[nbCasesX][nbCasesY].isTaken();
-        }
-      }
     }
 }
 
 class Marechal extends MovablePion {
-  constructor(){
+  constructor(color){
     super("marechal", 10);
+    this.color = color;
     this.type = '<img src="../pionStratego/marechal.png" />';
   }
   frappeEspion(){
@@ -91,8 +68,9 @@ class Marechal extends MovablePion {
 }
 
 class Espion extends MovablePion {
-  constructor(){
+  constructor(color){
     super("espion", 1);
+    this.color = color;
     this.type = '<img src="../pionStratego/espion.png" />';
   }
   frappeMarechal(){
@@ -101,8 +79,9 @@ class Espion extends MovablePion {
 }
 
 class Demineurs extends MovablePion {
-  constructor(){
+  constructor(color){
     super("demineur");
+    this.color = color;
     this.type = '<img src="../pionStratego/demineur.png" />';
   }
   demineBombe(){
@@ -111,76 +90,104 @@ class Demineurs extends MovablePion {
 }
 
 class General extends MovablePion {
-  constructor(){
+  constructor(color){
     super("general", 9);
+    this.color = color;
     this.type = '<img src="../pionStratego/general.png" />';
   }
 
 }
 
 class Eclaireurs extends Pion {
-  constructor(){
+  constructor(color){
     super("eclaireur", 2);
+    this.color = color;
     this.type = '<img src="../pionStratego/eclaireur.png" />';
   }
-//ne bouge qu'en avant
-  Avancer(){
 
+  Avancer(nbCasesX,nbCasesY,plateau){
+    /*----------- MOOV ECLAIREUR -----------*/
+    if(check_moove_eclaireur(plateau, this, nbCasesX, nbCasesY)){
+      // Fight de 2 éclaireurs OU Fight avec une bombe
+      if((plateau[nbCasesX][nbCasesY].name == 'eclaireur' || plateau[nbCasesX][nbCasesY].lvl == 30) && this.color != plateau[nbCasesX][nbCasesY].color){
+        plateau[nbCasesX][nbCasesY] = 1;
+        plateau[this.posX][this.posY] = 1;
+      }
+      // L'éclaireur perd
+      else if(plateau[nbCasesX][nbCasesY].lvl > this.lvl && plateau[nbCasesX][nbCasesY].name != 'drapeau' && this.color != plateau[nbCasesX][nbCasesY].color){
+        plateau[this.posX][this.posY] = 1;
+      }
+      // L'éclaireur gagne (que contre l'espionne)
+      else if(plateau[nbCasesX][nbCasesY].name == 'espion' && this.color != plateau[nbCasesX][nbCasesY].color){
+        plateau[nbCasesX][nbCasesY] = plateau[this.posX][this.posY];
+        plateau[this.posX][this.posY] = 1;
+        this.posX = nbCasesX;
+        this.posY = nbCasesY;
+      }
+      // Il prend le drapeau
+      else if(plateau[nbCasesX][nbCasesY].name == 'drapeau' && this.color != plateau[nbCasesX][nbCasesY].color){
+        plateau[nbCasesX][nbCasesY].isTaken();
+      }
+    }
   }
 }
 
 class Sergents extends MovablePion {
-  constructor(){
+  constructor(color){
     super("sergent", 4);
+    this.color = color;
     this.type = '<img src="../pionStratego/sergent.png" />';
   }
 
 }
 
 class Lieutenants extends MovablePion {
-  constructor(){
+  constructor(color){
     super("lieutenant", 5);
+    this.color = color;
     this.type = '<img src="../pionStratego/lieutenant.png" />';
   }
 
 }
 
 class Capitaines extends MovablePion {
-  constructor(){
+  constructor(color){
     super("capitaine", 6);
+    this.color = color;
     this.type = '<img src="../pionStratego/capitaine.png" />';
   }
 
 }
 
 class Commandants extends MovablePion {
-  constructor(){
+  constructor(color){
     super("commandant", 7);
+    this.color = color;
     this.type = '<img src="../pionStratego/commandant.png" />';
   }
 
 }
 
 class Colonels extends MovablePion {
-  constructor(){
+  constructor(color){
     super("colonel", 8);
+    this.color = color;
     this.type = '<img src="../pionStratego/colonel.png" />';
   }
 
 }
 
 class Drapeau extends Pion{
-  constructor(){
+  constructor(color){
     super("drapeau");
+    this.color = color;
     this.type = '<img src="../pionStratego/drapeau.png" />';
     this.taken = false;
   }
   //Méthodes :
   isTaken(){
     if(this.taken == false) {
-      if (Pion.captureDrapeau == true){ //Si un pion parvient à prendre le drapeau
         this.taken = true;
-      }
     }
     else if (this.taken == true){
       return this.taken;
@@ -190,8 +197,9 @@ class Drapeau extends Pion{
 
 
 class Bombes extends Pion {
-  constructor(){
+  constructor(color){
     super("bombe");
+    this.color = color;
     this.type = '<img src="../pionStratego/bombe.png" />';
   }
 }

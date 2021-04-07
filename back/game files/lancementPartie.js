@@ -2,8 +2,6 @@
 function getPseudo(){
 let psdo = document.getElementById('pseudoquery').value;
 let psdo2 = document.getElementById('pseudoquery2').value;
-//console.log("Votre pseudo : " + pseudo);
-
   let pdo = {j1 : psdo, j2 : psdo2};
 return pdo;
 }
@@ -21,6 +19,8 @@ function LaunchingGame(){
   console.log("Pseudo du joueur 2 : " + getPseudo().j2);
   let champpsdo = document.getElementById('pseudoquery');
   let champpsdo2 = document.getElementById('pseudoquery2');
+  PlayerRed.set_pseudo(getPseudo().j1);
+  PlayerBlue.set_pseudo(getPseudo().j2);
   //champpsdo.remove();// suppr le champ saisie pseudo
   //champpsdo2.remove();// suppr le champ saisie pseudo
 
@@ -67,22 +67,16 @@ function createPlateauButtons() {
 function PlayerTurn(Player,color) {
   alert("C'est au joueur " + color + " de jouer");
 
-  let username = Player.pseudo;
-  let turnIsFinished = false;
-  let gameIsFinished = false;
-
   /* AFFICHER PSEUDO DU JOUEUR QUI JOUE */
   //document.write("<h2> <script>Player.pseudo</script> </h2>");
 
-  let winner;
-  if (gameIsFinished != true) {
-    if (turnIsFinished != true) {
-      if (PlayerRed.pionsJoueur[33].isTaken()) {
-        gameIsFinished = true;
-        return winner = username;
-      } else if (PlayerBlue.pionsJoueur[33].isTaken()) {
-        gameIsFinished = true;
-        return winner = username;
+  /* PLAYER BLUE WIN */
+  if (PlayerRed.pionsJoueur[33].isTaken()) {
+        Redirect_Score(PlayerBlue.pseudo);
+      }
+  /* PLAYER RED WIN */
+  else if (PlayerBlue.pionsJoueur[33].isTaken()) {
+        Redirect_Score(PlayerRed.pseudo);
       }
 
   //GET LE PION A FAIRE AVANCER
@@ -90,43 +84,35 @@ function PlayerTurn(Player,color) {
   let elmt2 = 0;
   let iDeb, jDeb, iFin, jFin;
   let listenerButtns = document.getElementsByClassName('BoutonDuPlateau');
-  for(let i = 0 ; i < listenerButtns.length ; i++){
-    listenerButtns.item(i).addEventListener('click',
-      function(){
-        elmt = document.getElementById(i.toString());
-        let varID = GetIdOfClickedButton(pion);//Recupère l'indice i et j du pion dans le plateau
-        iDeb = varID.i;
-        jDeb = varID.j;
+  for(let i = 0 ; i < listenerButtns.length ; i++) {
+    let butnTMP = listenerButtns[i];
+    butnTMP.onclick = function () {
+          elmt = document.getElementById(i.toString());
+          let varID = GetIdOfClickedButton(elmt);//Recupère l'indice i et j du pion dans le plateau
+          iDeb = varID.i;
+          jDeb = varID.j;
 
-        for(let j = 0 ; j < listenerButtns.length ; j++){
-          listenerButtns.item(j).addEventListener('click',
-            function(){
-              elmt2 = document.getElementById(j.toString());
-              let varID2 = GetIdOfClickedButton(pion);//Recupère l'indice i et j du pion dans le plateau
-              iFin = varID2.i;
-              jFin = varID2.j;
-              plateau.plateau[iDeb][jDeb].Avancer(iFin,jfin,pion);
+          for (let j = 0; j < listenerButtns.length; j++) {
+            listenerButtns.item(j).addEventListener('click',
+                function () {
+                  elmt2 = document.getElementById(j.toString());
+                  let varID2 = GetIdOfClickedButton(elmt2);//Recupère l'indice i et j du pion dans le plateau
+                  iFin = varID2.i;
+                  jFin = varID2.j;
+                  plateau.plateau[iDeb][jDeb].Avancer(iFin, jFin, pion);
 
-              //Recursivité en fonction du joueur qui joue
-              if(color =='red'){
-                HideOponent('blue');
-                PlayerTurn(PlayerRed,'red');
-              } else if (color == 'blue'){
-                HideOponent('red');
-                PlayerTurn(PlayerBlue,'blue');
+                  //Recursivité en fonction du joueur qui joue
+                  if (color == 'red') {
+                    HideOponent('blue');
+                    PlayerTurn(PlayerRed, 'red');
+                  } else if (color == 'blue') {
+                    HideOponent('red');
+                    PlayerTurn(PlayerBlue, 'blue');
+                  }
                 }
-            }
-          );
+            );
+          }
         }
-      }
-    );
-  }
-
-
-    }
-  }
-  else{
-    alert("Partie terminée");
   }
 }
 
@@ -157,4 +143,18 @@ else if(color=='red'){
     btn.style.color = "#EFEFEF";
   }
 }
+}
+
+function Redirect_Score(pseudo){
+  let date = new Date();
+
+  let winner = pseudo,
+  time = {
+    hour: (date.getHours() - PlayerRed.chrono_Start.heure).toString(),
+    minute: (date.getMinutes() - PlayerRed.chrono_Start.minute).toString(),
+    seconds: (Math.ceil(date.getSeconds() - PlayerRed.chrono_Start.seconde)).toString(), //Valeur absolu
+  };
+
+  // Redirection vers la page score en passant le WINNER & le TIME GAME dans l'URL
+  document.location.href = "score.html?name=" + winner + "&h=" + time.hour+"&min="+time.minute+"&sec="+time.seconds;
 }
