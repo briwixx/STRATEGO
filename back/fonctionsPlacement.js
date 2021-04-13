@@ -85,8 +85,8 @@ if (bluePions.length > 0) {
   if (redPions.length === 40) {
     // Pour chaque bouton bleu, je rend le texte invisible
     for (let btn of blueBtn) {
-      btn.childNodes[0].color = "#EFEFEF";
-      btn.style.color = "#EFEFEF";
+      btn.childNodes[0].style.background = '<img src="https://img.icons8.com/ios/50/000000/hide.png"/>';
+      btn.style.style.background = '<img src="https://img.icons8.com/ios/50/000000/hide.png"/>';
     }
   // Sinon, si le rouge a tout posé
   } else if (redPions.length === 0) {

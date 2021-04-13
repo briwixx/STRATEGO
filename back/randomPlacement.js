@@ -22,9 +22,7 @@ function randomPlacement(player){
       }
     }
     check.push(i);
-
     player.randPlacementPion(player.pionsJoueur[i], i, plateau, player.color);
-
   }
   console.log('tous les pions du joueur ' + player.color + " sont placés");
 
