@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="../css/index.css"> <!-- Pour le CSS de la page -->
+      <title>Stratego</title>
+      <link href='https://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+
+  <script>
+          document.write('      <div class="game">\n' +
+              '          <h1>La partie est terminé !</h1>\n' +
+              '      </div>\n' +
+              '\n' +
+              '      <div class="temps">\n' +
+              '          <h2 id="time"></h2>\n' +
+              '      </div>\n' +
+              '     <div class="score">\n' +
+              '      <div class= "winner">\n' +
+              '        <h1>Winner</h1>\n' +
+              '        <h2 id="pwinner"></h2>\n' +
+              '        <div class="stat">\n' +
+              '            <p id="ScoreW"></p>\n' +
+              '            <p id="NbW"></p>\n' +
+              '        </div>\n' +
+              '      </div>\n' +
+              '      \n' +
+              '      <div class= "looser">\n' +
+              '        <h1>Looser</h1>\n' +
+              '        <h2 id="plooser"></h2>\n' +
+              '        <div class="stat">\n' +
+              '            <p id="ScoreL"></p>\n' +
+              '            <p id="NbL"></p>\n' +
+              '        </div>\n' +
+              '      </div>\n' +
+              '      </div>')
+
+  </script>
+
+    
+        <!--Mon tableau -->
+        <table id="tabliau">
+          <p class="titre">Meilleur joueur</p>
+            <tr>
+                <th>Rang</th>
+                <th>Nom</th>
+                <th>Score</th>
+            </tr>
+        </table>
+
+
+<footer>
+  <div class="footer">
+    <div class="container">
+        <div class="col">
+            <h2>Préparez</h2>
+            <p>Placer vos troupes de manière tactique.</p>
+        </div>
+        <div class="col">
+              <h2>Affrontez</h2>
+              <p>Mesurer vous à d'autres joueurs. </p>
+        </div>
+        <div class="col">
+              <h2>Gagnez</h2>
+              <p>Remporter la victoire grâce à votre stratégie.</p>
+        </div>
+    <div class="clearfix"></div>
+  </div>
+  </div></footer>
+<script src="./../../back/score.js"></script>
+  </body>
+
+</html>
