@@ -86,6 +86,7 @@ function PlayerTurn(Player,color) {
   let iDeb, jDeb, iFin, jFin;
   let listenerButtns = document.getElementsByClassName('BoutonDuPlateau');
   for(let i = 0 ; i < listenerButtns.length ; i++) {
+
     let butnTMP = listenerButtns[i];
     butnTMP.onclick = function () {
       elmt = document.getElementById(i.toString());
@@ -105,20 +106,24 @@ function PlayerTurn(Player,color) {
               //Recursivité en fonction du joueur qui joue
               if (color == 'red') {
                 HideOponent('blue');
+
                 let t = new Date();
                 PlayerRed.timeR.minute += t.getMinutes() - PlayerRed.chrono.minute;
                 PlayerRed.timeR.seconde += t.getSeconds() - PlayerRed.chrono.seconde;
                 PlayerBlue.chrono.minute  = t.getMinutes();
                 PlayerBlue.chrono.seconde = t.getSeconds();
+
                 PlayerTurn(PlayerRed, 'red');
               }
               else if (color == 'blue') {
                 HideOponent('red');
+
                 let t = new Date();
                 PlayerBlue.timeR.minute += t.getMinutes() - PlayerBlue.chrono.minute;
                 PlayerBlue.timeR.seconde += t.getSeconds() - PlayerBlue.chrono.seconde;
                 PlayerRed.chrono.minute  = t.getMinutes();
                 PlayerRed.chrono.seconde = t.getSeconds();
+                
                 PlayerTurn(PlayerBlue, 'blue');
               }
             }
