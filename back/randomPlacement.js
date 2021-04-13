@@ -10,7 +10,7 @@ function randomPlacement(player){
     for (let j = 0 ; j < check.length ; j++){
       if (i == check[j]){
         console.log('Pion déja placé');
-        randomPlacement(player);
+        return randomPlacement(player);
       }
     }
     check.push(i);

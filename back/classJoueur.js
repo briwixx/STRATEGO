@@ -115,28 +115,29 @@ PlacementPion(pion, j, plateau, color) {
 
 randPlacementPion(pion, j, plateau, color){
 
-console.log('test1');
 let selectedPion = document.getElementById(color + j.toString());
 let caseTmp;
-
+let k,l;
 let checkblue = [];
 let checkred = [];
 
 if (color == 'blue'){
   let randInd = Math.round(Math.random()*(99 - 60 + 1) + 60);
-  for (let k = 0; k < checkblue.length; k++) {
-    if(randInd == check[k]){
-      randPlacementPion(pion,j,plateau,color);
+  for (k = 0; k < checkblue.length; k++) {
+    if(randInd == checkblue[k]){
+      return randomPlacement(PlayerBlue);
     }
   }
   checkblue.push(randInd);
   caseTmp = document.getElementById(randInd);
 }
+
 else if (color == 'red'){
-  let randInd = Math.round(Math.random() * 39);
-  for (let k = 0; k < checkred.length; k++) {
-    if(randInd == check[k]){
-      randPlacementPion(pion,j,plateau,color);
+  let randInd = Math.round(Math.random() * 39+1);
+  for (l = 0; l < checkred.length; l++) {
+    if(randInd == checkred[l]){
+
+      return randomPlacement(PlayerRed);
     }
   }
   checkred.push(randInd);
