@@ -73,15 +73,15 @@ function createPlateauButtons() {
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
 function PlayerTurn(Player,color) {
+
+  //hideOponent ne fonctionne pas comme on le voulait
   if (color == 'red') {
-    HideOponent('blue');
+  //  HideOponent('blue');
   }
   if (color == 'blue') {
-    HideOponent('red');
+  //  HideOponent('red');
   }
-  /* AFFICHER PSEUDO DU JOUEUR QUI JOUE */
-  //document.write("<h2> <script>Player.pseudo</script> </h2>");
-/*
+  
   if (PlayerRed.pionsJoueur[33].isTaken()) {
     Redirect_Score(PlayerBlue.pseudo);
   }
@@ -89,7 +89,7 @@ function PlayerTurn(Player,color) {
   else if (PlayerBlue.pionsJoueur[33].isTaken()) {
     Redirect_Score(PlayerRed.pseudo);
   }
-*/
+
   //GET LE PION A FAIRE AVANCER
   let elmt = 0;
   let elmt2 = 0;
