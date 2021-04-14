@@ -110,8 +110,8 @@ class MovablePion extends Pion {
         }
         else {
           this.type = '<img src="../PionCouleurs/general-blue.png" />';
-        }
-      }
+        }      }
+
     }
 
     class Eclaireurs extends Pion {
