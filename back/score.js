@@ -22,6 +22,7 @@ if($_GET('h') != null)
         time_w = $_GET('time_w'), time_l =  $_GET('time_l'),
         score_w = $_GET('score_w'), score_l = $_GET('score_l');
 
+
     let time = document.getElementById("time");
     time.innerHTML=time_hour+" :"+time_min+" :"+time_sec;
 
@@ -31,6 +32,8 @@ if($_GET('h') != null)
     scoreW.innerHTML ="Score : "+ score_w;
     let nbW = document.getElementById("NbW");
     nbW.innerHTML ="Nombre de morts : "+ nb_w;
+    let timeW = document.getElementById("timeW");
+    timeW.innerHTML ="Temps de jeux: "+ time_w;
 
     let plooser = document.getElementById("plooser");
     plooser.innerHTML =pseudo_l;
@@ -38,6 +41,8 @@ if($_GET('h') != null)
     scoreL.innerHTML ="Score : "+ score_l;
     let nbL = document.getElementById("NbL");
     nbL.innerHTML ="Nombre de morts : "+ nb_l;
+    let timeL = document.getElementById("timeL");
+    timeL.innerHTML ="Temps de jeux: "+ time_l;
 
 }
 

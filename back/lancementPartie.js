@@ -8,10 +8,17 @@ function getPseudo(){
 
 //Bouton start qui déclenche createPlateauButtons en dessous et récupère le pseudo
 let startbutton = document.createElement("button")
-startbutton.innerHTML = "Start game !"
+startbutton.innerHTML = "Start game !";
 document.body.appendChild(startbutton);
 startbutton.addEventListener("click",LaunchingGame);
 startbutton.onclick = getPseudo;
+//css
+startbutton.style.fontSize="18px";
+startbutton.style.textDecoration="none";
+startbutton.style.backgroundColor="#1c1c1c";
+startbutton.style.color="white";
+startbutton.style.padding="8px 30px";
+startbutton.style.marginLeft="43vw";
 
 function LaunchingGame(){
   startbutton.remove(); // Supprime le bouton start game au lancement de la partie
@@ -66,65 +73,74 @@ function createPlateauButtons() {
 
 //Lancement de la game, se finit lorsque le drapeau est capturé
 function PlayerTurn(Player,color) {
-  alert("C'est au joueur " + color + " de jouer");
 
+  //HideOponent désactivé
+  if (color == 'red') {
+    //HideOponent('blue');
+  }
+  if (color == 'blue') {
+    //HideOponent('red');
+  }
   /* AFFICHER PSEUDO DU JOUEUR QUI JOUE */
   //document.write("<h2> <script>Player.pseudo</script> </h2>");
-
-  /* PLAYER BLUE WIN */
+/*
   if (PlayerRed.pionsJoueur[33].isTaken()) {
     Redirect_Score(PlayerBlue.pseudo);
   }
-  /* PLAYER RED WIN */
+
   else if (PlayerBlue.pionsJoueur[33].isTaken()) {
     Redirect_Score(PlayerRed.pseudo);
   }
-
+*/
   //GET LE PION A FAIRE AVANCER
   let elmt = 0;
   let elmt2 = 0;
-  let iDeb, jDeb, iFin, jFin;
+  let idElmt2;
+  let varID, varID2;
   let listenerButtns = document.getElementsByClassName('BoutonDuPlateau');
   for(let i = 0 ; i < listenerButtns.length ; i++) {
-    let butnTMP = listenerButtns[i];
-    butnTMP.onclick = function () {
-      elmt = document.getElementById(i.toString());
-      let varID = GetIdOfClickedButton(elmt);//Recupère l'indice i et j du pion dans le plateau
-      iDeb = varID.i;
-      jDeb = varID.j;
+    listenerButtns.item(i).addEventListener('click', function () {
+      elmt = document.getElementById(i);
+      console.log(elmt);
+      const idElmt1 = elmt.getAttribute('id');
+      varID = GetIdOfClickedButton(elmt);//Recupère l'indice i et j du pion dans le plateau
+      const iDeb = varID.i;
+      const jDeb = varID.j;
+        for (let j = 0; j < listenerButtns.length; j++) {
+          listenerButtns.item(j).addEventListener('click',
+              function () {
+                elmt2 = document.getElementById(j);
+                console.log(elmt2);
+                idElmt2 = elmt2.getAttribute('id');
+                varID2 = GetIdOfClickedButton(elmt2);//Recupère l'indice i et j d'une case vide du plateau
 
-      for (let j = 0; j < listenerButtns.length; j++) {
-        listenerButtns.item(j).addEventListener('click',
-            function () {
-              elmt2 = document.getElementById(j.toString());
-              let varID2 = GetIdOfClickedButton(elmt2);//Recupère l'indice i et j du pion dans le plateau
-              iFin = varID2.i;
-              jFin = varID2.j;
-              plateau.plateau[iDeb][jDeb].Avancer(iFin, jFin, pion);
+                console.log("case a bouger : " + iDeb ,jDeb);
+                console.log("destination : " + varID2.i , varID2.j);
+                plateau.plateau[iDeb][jDeb].Avancer(varID2.i, varID2.j,iDeb,jDeb,idElmt1,idElmt2);
 
-              //Recursivité en fonction du joueur qui joue
-              if (color == 'red') {
-                HideOponent('blue');
-                let t = new Date();
-                PlayerRed.timeR.minute += t.getMinutes() - PlayerRed.chrono.minute;
-                PlayerRed.timeR.seconde += t.getSeconds() - PlayerRed.chrono.seconde;
-                PlayerBlue.chrono.minute  = t.getMinutes();
-                PlayerBlue.chrono.seconde = t.getSeconds();
-                PlayerTurn(PlayerRed, 'red');
-              }
-              else if (color == 'blue') {
-                HideOponent('red');
-                let t = new Date();
-                PlayerBlue.timeR.minute += t.getMinutes() - PlayerBlue.chrono.minute;
-                PlayerBlue.timeR.seconde += t.getSeconds() - PlayerBlue.chrono.seconde;
-                PlayerRed.chrono.minute  = t.getMinutes();
-                PlayerRed.chrono.seconde = t.getSeconds();
-                PlayerTurn(PlayerBlue, 'blue');
-              }
+                //Recursivité en fonction du joueur qui joue
+                if (color == 'red') {
+                  let t = new Date();
+                  PlayerRed.timeR.minute += t.getMinutes() - PlayerRed.chrono.minute;
+                  PlayerRed.timeR.seconde += t.getSeconds() - PlayerRed.chrono.seconde;
+                  PlayerBlue.chrono.minute  = t.getMinutes();
+                  PlayerBlue.chrono.seconde = t.getSeconds();
+                  PlayerTurn(PlayerBlue, 'blue');
+                }
+                else if (color == 'blue') {
+                  let t = new Date();
+                  PlayerBlue.timeR.minute += t.getMinutes() - PlayerBlue.chrono.minute;
+                  PlayerBlue.timeR.seconde += t.getSeconds() - PlayerBlue.chrono.seconde;
+                  PlayerRed.chrono.minute  = t.getMinutes();
+                  PlayerRed.chrono.seconde = t.getSeconds();
+                  PlayerTurn(PlayerRed, 'red');
+                }
             }
         );
       }
+
     }
+  );
   }
 }
 
@@ -132,27 +148,26 @@ function PlayerTurn(Player,color) {
 function HideOponent(color){
   // Je récupère tous les boutons du plateau, j'assigne les 40 premiers au rouge, et les 40 derniers au bleu
   let btnPlateau = document.getElementsByClassName("BoutonDuPlateau");
-  let redBtn = [];
-  let blueBtn = [];
-  for (let btn of btnPlateau) {
-    if (btn.id > 0 && btn.id < 40) {
-      redBtn.push(btn)
-    } else if (btn.id < 100 && btn.id > 59) {
-      blueBtn.push(btn)
-    }
-  }
 
   if(color == 'blue'){
-    for (let btn of blueBtn) {
-      btn.childNodes[0].color = "#EFEFEF";
-      btn.style.color = "#EFEFEF";
+    for (let j = 60 ; j < 100 ; j++) {
+      btnPlateau.item(j).hidden=true;
+      //btn.style.visibility="hidden";
+    }
+    for (let j = 0 ; j < 40 ; j++) {
+      btnPlateau.item(j).hidden=false;
+      //btn.style.visibility="hidden";
     }
   }
 
   else if(color=='red'){
-    for (let btn of redBtn) {
-      btn.childNodes[0].color = "#EFEFEF";
-      btn.style.color = "#EFEFEF";
+    for (let j = 0 ; j < 40 ; j++) {
+      btnPlateau.item(j).hidden=true;
+      //btn.style.visibility="hidden";
+    }
+    for (let j = 60 ; j < 100 ; j++) {
+      btnPlateau.item(j).hidden=false;
+      //btn.style.visibility="hidden";
     }
   }
 }
