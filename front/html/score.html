@@ -10,6 +10,7 @@
   <body>
 
   <script>
+      if($_GET('h') != null) {
           document.write('      <div class="game">\n' +
               '          <h1>La partie est terminé !</h1>\n' +
               '      </div>\n' +
@@ -24,6 +25,7 @@
               '        <div class="stat">\n' +
               '            <p id="ScoreW"></p>\n' +
               '            <p id="NbW"></p>\n' +
+              '            <p id="timeW"></p>\n' +
               '        </div>\n' +
               '      </div>\n' +
               '      \n' +
@@ -33,10 +35,11 @@
               '        <div class="stat">\n' +
               '            <p id="ScoreL"></p>\n' +
               '            <p id="NbL"></p>\n' +
+              '            <p id="timeL"></p>\n' +
               '        </div>\n' +
               '      </div>\n' +
-              '      </div>')
-
+              '      </div>');
+      }
   </script>
 
     

@@ -16,20 +16,35 @@
 
 	<body>
 
+    <ul id="menu">
+
+        <li><a href="index.html">Accueil</a></li>
+              
+            <li><a href = " jeu.html " > Jouer !</a></li>
+              
+            <li><a href="connexion.html">Se connecter</a>
+              
+        </li>
+        </ul>
+
      <div id="main">
          <div id="titre">
                 <h1>Partie</h1>
          </div>
+
+         <div id="main">
          <div id="Pseudo">
            <input type="text" id="pseudoquery" placeholder="Entrez Pseudo du joueur 1"></input>
            <input type="text" id="pseudoquery2" placeholder="Entrez Pseudo du joueur 2"></input>
          </div>
+         <div class="grid-container">
          <div id="pionsPlayerRed"></div>
-         <br/>
+         
          <div id="plateauJeu"></div>
          <div id="pionsPlayerBlue"></div>
-         <br/>
+        </div>
          <div id="buttons"></div>
+        </div>
 
          <script src="./../../back/classPlateau.js"></script>
          <script src="./../../back/classesPions.js"></script>

@@ -3,8 +3,6 @@ class Pion {
   constructor(name, lvl, color) {
     this.name = name;
     this.lvl = lvl;
-    this.posX = 0;
-    this.posY = 0;
     this.color = color;
   }
 }
@@ -13,47 +11,50 @@ class MovablePion extends Pion {
   constructor(name,type, color) {
     super(name, type, color);
   }
-  Avancer(nbCasesX,nbCasesY){
+  Avancer(iDest,jDest,iDeb,jDeb,idDeb,idFin){
     //Avance que d'une case
     // Si c'est pas un éclaireur = qu'il ne peut avancer que d'une case, qu'il ne va pas dans un lac et qu'il ne va pas en diagonale : Go avancer d'une case!
-    if(this.name !== 'eclaireur' && plateau.plateau[nbCasesX][nbCasesY] != 0 && (nbCasesX+1 == this.posX && nbCasesY == this.posY) || (nbCasesY+1 == this.posY&& nbCasesX == this.posX) || (nbCasesX-1 == this.posX && nbCasesY == this.posY)|| (nbCasesY-1 == this.posY && nbCasesX == this.posX)) {
-      if (plateau.plateau[nbCasesX][nbCasesY] == 1) {
-        plateau.plateau[nbCasesX][nbCasesY] = plateau.plateau[this.posX][this.posY];
-        plateau.plateau[this.posX][this.posY] = 1;
-        this.posX=nbCasesX;
-        this.posY=nbCasesY;
+    if(this.name != 'eclaireur' && plateau.plateau[iDest][jDest] != 0 && (iDest+1 == iDeb && jDest == jDeb) || (jDest+1 == jDeb&& iDest == iDeb) || (iDest-1 == iDeb && jDest == jDeb)|| (jDest-1 == jDeb && iDest == iDeb)) {
+      if (plateau.plateau[iDest][jDest] == 1) {
+        plateau.plateau[iDest][jDest] = plateau.plateau[iDeb][jDeb];
+        plateau.plateau[iDeb][jDeb] = 1;
+
+        let caseAvider = document.getElementById(idDeb);
+        let caseAremplir = document.getElementById(idFin);
+
+        caseAvider.innerHTML = '';
+        caseAremplir.innerHTML = this.type;
     }
 
-
           // Si le pion se déplace sur une case occupée par un pion ennemi : FIGHT !!
-          else if (plateau.plateau[nbCasesX][nbCasesY] instanceof Pion && plateau.plateau[nbCasesX][nbCasesY].color != this.color) {
-            switch (plateau.plateau[nbCasesX][nbCasesY].lvl) {
+          else if (plateau.plateau[iDest][jDest] instanceof Pion && plateau.plateau[iDest][jDest].color != this.color) {
+            switch (plateau.plateau[iDest][jDest].lvl) {
                 // On bat ! (+ Espion VS maréchal + Démineur VS bombes)
-                case (this.lvl == 1 && plateau.plateau[nbCasesX][nbCasesY].lvl == 10) || (this.lvl == 3 && plateau.plateau[nbCasesX][nbCasesY] == 30) || (this.lvl > plateau.plateau[nbCasesX][nbCasesY].lvl && plateau.plateau[nbCasesX][nbCasesY].lvl > 0 ):
-                  plateau.plateau[nbCasesX][nbCasesY].nb_death ++;
-                  plateau.plateau[nbCasesX][nbCasesY] = plateau.plateau[this.posX][this.posY];
-                  plateau.plateau[this.posX][this.posY] = 1;
-                  this.posX = nbCasesX;
-                  this.posY = nbCasesY;
+                case (this.lvl == 1 && plateau.plateau[iDest][jDest].lvl == 10) || (this.lvl == 3 && plateau.plateau[iDest][jDest] == 30) || (this.lvl > plateau.plateau[iDest][jDest].lvl && plateau.plateau[iDest][jDest].lvl > 0 ):
+                  plateau.plateau[iDest][jDest].nb_death ++;
+                  plateau.plateau[iDest][jDest] = plateau.plateau[iDeb][jDeb];
+                  plateau.plateau[iDeb][jDeb] = 1;
+                  iDeb = iDest;
+                  jDeb = jDest;
                   break;
 
                 // Battu
-                case this.lvl < plateau.plateau[nbCasesX][nbCasesY].lvl && plateau.plateau[nbCasesX][nbCasesY].lvl != 30:
-                  plateau.plateau[this.posX][this.posY] = 1;
+                case this.lvl < plateau.plateau[iDest][jDest].lvl && plateau.plateau[iDest][jDest].lvl != 30:
+                  plateau.plateau[iDeb][jDeb] = 1;
                   this.nb_death ++;
                   break;
 
                 // Combat entre 2 même pions OU Battu avec une bombe
-                case this.lvl == plateau.plateau[nbCasesX][nbCasesY].lvl || plateau.plateau[nbCasesX][nbCasesY].lvl == 30:
-                  plateau.plateau[nbCasesX][nbCasesY].nb_death ++;
+                case this.lvl == plateau.plateau[iDest][jDest].lvl || plateau.plateau[iDest][jDest].lvl == 30:
+                  plateau.plateau[iDest][jDest].nb_death ++;
                   this.nb_death ++;
-                  plateau.plateau[nbCasesX][nbCasesY] = 1;
-                  plateau.plateau[this.posX][this.posY] = 1;
+                  plateau.plateau[iDest][jDest] = 1;
+                  plateau.plateau[iDeb][jDeb] = 1;
                   break;
 
                 // WIN : Drapeau pris
-                case plateau.plateau[nbCasesX][nbCasesY].lvl == 0:
-                  plateau.plateau[nbCasesX][nbCasesY].isTaken();
+                case plateau.plateau[iDest][jDest].lvl == 0:
+                  plateau.plateau[iDest][jDest].isTaken();
                   break;
               }
             }
@@ -125,32 +126,42 @@ class MovablePion extends Pion {
         }
       }
 
-      Avancer(nbCasesX,nbCasesY,plateau){
+      Avancer(iDest,jDest,iDeb,jDeb,idDeb,idFin){
+        if (plateau.plateau[iDest][jDest] == 1) {
+          plateau.plateau[iDest][jDest] = plateau.plateau[iDeb][jDeb];
+          plateau.plateau[iDeb][jDeb] = 1;
+
+          let caseAvider = document.getElementById(idDeb);
+          let caseAremplir = document.getElementById(idFin);
+
+          caseAvider.innerHTML = '';
+          caseAremplir.innerHTML = this.type;
+      }
         /*----------- MOOV ECLAIREUR -----------*/
-        if(check_moove_eclaireur(plateau, this, nbCasesX, nbCasesY)){
+        if(check_moove_eclaireur(iDest, jDest)){
           // Fight de 2 éclaireurs OU Fight avec une bombe
-          if((plateau[nbCasesX][nbCasesY].name == 'eclaireur' || plateau[nbCasesX][nbCasesY].lvl == 30) && this.color != plateau[nbCasesX][nbCasesY].color){
-            plateau[nbCasesX][nbCasesY].nb_death ++;
-            this.nb_death ++;
-            plateau[nbCasesX][nbCasesY] = 1;
-            plateau[this.posX][this.posY] = 1;
+          if((plateau[iDest][jDest].name == 'eclaireur' || plateau[iDest][jDest].lvl == 30) && this.color != plateau[iDest][jDest].color){
+            plateau[iDest][jDest].nb_death ++;
+            this.nb_death++;
+            plateau[iDest][jDest] = 1;
+            plateau[iDeb][jDeb] = 1;
           }
           // L'éclaireur perd
-          else if(plateau[nbCasesX][nbCasesY].lvl > this.lvl && plateau[nbCasesX][nbCasesY].name != 'drapeau' && this.color != plateau[nbCasesX][nbCasesY].color){
-            this.nb_death ++;
-            plateau[this.posX][this.posY] = 1;
+          else if(plateau[iDest][jDest].lvl > this.lvl && plateau[iDest][jDest].name != 'drapeau' && this.color != plateau[iDest][jDest].color){
+            this.nb_death++;
+            plateau[iDeb][jDeb] = 1;
           }
           // L'éclaireur gagne (que contre l'espionne)
-          else if(plateau[nbCasesX][nbCasesY].name == 'espion' && this.color != plateau[nbCasesX][nbCasesY].color){
-            plateau[nbCasesX][nbCasesY].nb_death ++;
-            plateau[nbCasesX][nbCasesY] = plateau[this.posX][this.posY];
-            plateau[this.posX][this.posY] = 1;
-            this.posX = nbCasesX;
-            this.posY = nbCasesY;
+          else if(plateau[iDest][jDest].name == 'espion' && this.color != plateau[iDest][jDest].color){
+            plateau[iDest][jDest].nb_death++;
+            plateau[iDest][jDest] = plateau[iDeb][jDeb];
+            plateau[iDeb][jDeb] = 1;
+            iDeb = iDest;
+            jDeb = jDest;
           }
           // Il prend le drapeau
-          else if(plateau[nbCasesX][nbCasesY].name == 'drapeau' && this.color != plateau[nbCasesX][nbCasesY].color){
-            plateau[nbCasesX][nbCasesY].isTaken();
+          else if(plateau[iDest][jDest].name == 'drapeau' && this.color != plateau[iDest][jDest].color){
+            plateau[iDest][jDest].isTaken();
           }
         }
       }

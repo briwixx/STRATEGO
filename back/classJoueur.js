@@ -113,87 +113,76 @@ PlacementPion(pion, j, plateau, color) {
   }
 }
 
+//Fonctions qui place les pions dans la case voulue (blueindex & redindex)
 randPlacementPion(pion, j, plateau, color){
 
-let selectedPion = document.getElementById(color + j.toString());
-let caseTmp;
-let k,l;
-let checkblue = [];
-let checkred = [];
+  let selectedPion = document.getElementById(color + j.toString());
+  let caseTmp;
 
-if (color == 'blue'){
-  let randInd = Math.round(Math.random()*(99 - 60 + 1) + 60);
-  for (k = 0; k < checkblue.length; k++) {
-    if(randInd == checkblue[k]){
-      return randomPlacement(PlayerBlue);
-    }
+  if (color == 'blue'){
+    caseTmp = document.getElementById(blueindex);
+    blueindex++;
   }
-  checkblue.push(randInd);
-  caseTmp = document.getElementById(randInd);
-}
 
-else if (color == 'red'){
-  let randInd = Math.round(Math.random() * 39+1);
-  for (l = 0; l < checkred.length; l++) {
-    if(randInd == checkred[l]){
-
-      return randomPlacement(PlayerRed);
-    }
+  else if (color == 'red'){
+    caseTmp = document.getElementById(redindex);
+    redindex++;
   }
-  checkred.push(randInd);
-  caseTmp = document.getElementById(randInd);
-}
 
   let IDs = GetIdOfClickedButton(caseTmp);
   let caseI = IDs.i;
   let caseJ = IDs.j;
 
-      // [J] Je récupère le nombre de pions bleus présents dans la main du joueur bleu
-      let nbBlueBtn = document.getElementsByClassName("bluebtn").length;
-      // Si il a + de 0 pions non placés, c'est son tour.
-      if (nbBlueBtn > 0) {
-        // Si la couleur du pion séléctionné est rouge, message d'erreur
-        if (color === "red") {
-          alert("C'est au bleu de jouer");
-          // Si c'est bleu
-        } else if (color === "blue") {
-          // Et qu'il est posé sur les 4 dernières lignes du plateau
-          if (caseI > 5) {
-            // L'objet pion placé sur le plateau (backend)
-            plateau.plateau[caseI][caseJ] = pion;
-            // J'écris le nom du pion sur la case (frontent)
-            caseTmp.innerHTML = pion.type;
-            console.log(pion.name + " placé sur la case du plateau (" + caseI + "," + caseJ + ")");
-            // Je supprime le pion dans la main du joueur
-            pion = null;
-            selectedPion.remove()
-            // Si le pion est posé sur les 2 lignes du milieu
-          } else if (caseI === 4 || caseI === 5) {
-            alert("Vous ne pouvez pas poser votre pion ici ! ")
-            // Sinon
-          } else {
-            alert("Veuillez poser votre pion sur votre partie du plateau !")
-          }
-        } // Sinon, si le joueur bleu n'a plus de pions a poser, même fonctionnement.
-      } else if (nbBlueBtn === 0) {
-        if (color === "blue") {
-          alert("C'est au rouge de jouer");
-        } else if (color === "red") {
-          if (caseI < 4) {
-            plateau.plateau[caseI][caseJ] = pion;
-            caseTmp.innerHTML = pion.type;
-            console.log(pion.name + " placé sur la case du plateau (" + caseI + "," + caseI + ")");
-            pion = null
-            selectedPion.remove()
-          } else if (caseI === 4 || caseI === 5) {
-            alert("Vous ne pouvez pas poser votre pion ici ! ")
-          } else {
-            alert("Veuillez poser votre pion sur votre partie du plateau !")
-          }
+    // [J] Je récupère le nombre de pions bleus présents dans la main du joueur bleu
+    let nbBlueBtn = document.getElementsByClassName("bluebtn").length;
+    // Si il a + de 0 pions non placés, c'est son tour.
+    if (nbBlueBtn > 0) {
+      // Si la couleur du pion séléctionné est rouge, message d'erreur
+      if (color === "red") {
+        alert("C'est au bleu de jouer");
+        // Si c'est bleu
+      } else if (color === "blue") {
+        // Et qu'il est posé sur les 4 dernières lignes du plateau
+        if (caseI > 5) {
+          // L'objet pion placé sur le plateau (backend)
+          plateau.plateau[caseI][caseJ] = pion;
+          // J'écris le nom du pion sur la case (frontent)
+          caseTmp.innerHTML = pion.type;
+          console.log(pion.name + " placé sur la case du plateau (" + caseI + "," + caseJ + ")");
+          // Je supprime le pion dans la main du joueur
+          pion = null;
+          selectedPion.remove()
+          // Si le pion est posé sur les 2 lignes du milieu
+        } else if (caseI === 4 || caseI === 5) {
+          alert("Vous ne pouvez pas poser votre pion ici ! ")
+          // Sinon
+        } else {
+          alert("Veuillez poser votre pion sur votre partie du plateau !")
+        }
+      } // Sinon, si le joueur bleu n'a plus de pions a poser, même fonctionnement.
+    } else if (nbBlueBtn === 0) {
+      if (color === "blue") {
+        alert("C'est au rouge de jouer");
+      } else if (color === "red") {
+        if (caseI < 4) {
+          plateau.plateau[caseI][caseJ] = pion;
+          caseTmp.innerHTML = pion.type;
+          console.log(pion.name + " placé sur la case du plateau (" + caseI + "," + caseI + ")");
+          pion = null
+          selectedPion.remove()
+        } else if (caseI === 4 || caseI === 5) {
+          alert("Vous ne pouvez pas poser votre pion ici ! ")
+        } else {
+          alert("Veuillez poser votre pion sur votre partie du plateau !")
         }
       }
     }
+  }
 }
+
+//Variables globales pour placement aléatoire dans l'ordre des cases du plateau
+let blueindex = 60;
+let redindex = 0;
 
 let PlayerRed = new Joueur('red');
 let PlayerBlue = new Joueur('blue');
@@ -218,7 +207,13 @@ let divpionsblue = document.getElementById('pionsPlayerBlue');
 
 function genPionsButtons() {
 let msgred = document.createElement("p");
-msgred.textContent = "Pions du joueur Rouge :"
+msgred.textContent = "Pions du joueur Rouge"
+//css
+msgred.style.fontSize="18px";
+msgred.style.border="5px ridge #A4371E";
+msgred.style.borderRadius="6px";
+msgred.style.color="white";
+msgred.style.padding="8px 30px";
 divpionsred.appendChild(msgred);
 
 for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
@@ -230,7 +225,13 @@ for (var i = 0; i < PlayerRed.pionsJoueur.length; i++) {
 }
 
 let msgblu = document.createElement("p");
-msgblu.textContent = "Pions du joueur Bleu :"
+msgblu.textContent = "Pions du joueur Bleu"
+//css
+msgblu.style.fontSize="18px";
+msgblu.style.border="5px ridge #3361A4";
+msgblu.style.borderRadius="6px";
+msgblu.style.color="white";
+msgblu.style.padding="8px 30px";
 divpionsblue.appendChild(msgblu);
 
 for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
@@ -242,18 +243,36 @@ for (var i = 0; i < PlayerBlue.pionsJoueur.length; i++) {
 }
 
 let btnValidate = document.createElement("button")
-btnValidate.innerHTML = "Valider mon tour"
+btnValidate.innerHTML = "Valider mon tour";
+//css
+btnValidate.style.fontSize="18px";
+btnValidate.style.border="5px ridge #ffffff";
+btnValidate.style.color="white";
+btnValidate.style.padding="8px 30px";
+btnValidate.style.backgroundColor="#1c1c1c";
 btnValidate.onclick = () => validateTurn()
 document.getElementById("buttons").appendChild(btnValidate)
 
 
 let btnRandomblue = document.createElement('button');
 btnRandomblue.innerHTML = "Placement Random Bleu";
+//css
+btnRandomblue.style.fontSize="18px";
+btnRandomblue.style.border="5px ridge #3361A4";
+btnRandomblue.style.color="white";
+btnRandomblue.style.padding="8px 30px";
+btnRandomblue.style.backgroundColor="#1c1c1c";
 btnRandomblue.onclick = () => randomPlacement(PlayerBlue);
 document.getElementById("pionsPlayerBlue").appendChild(btnRandomblue);
 
 let btnRandomred = document.createElement('button');
 btnRandomred.innerHTML = "Placement Random Red";
+//css
+btnRandomred.style.fontSize="18px";
+btnRandomred.style.border="5px ridge #A4371E";
+btnRandomred.style.color="white";
+btnRandomred.style.padding="8px 30px";
+btnRandomred.style.backgroundColor="#1c1c1c";
 btnRandomred.onclick = () => randomPlacement(PlayerRed);
 document.getElementById("pionsPlayerRed").appendChild(btnRandomred);
 }
@@ -273,6 +292,11 @@ for (let btn of btnPlateau) {
   }
 }
 
+
+
+
+
+
 // Je récupère tout les pions de chaque joueur non posé
 let bluePions = document.getElementsByClassName("bluebtn");
 let redPions = document.getElementsByClassName("redbtn");
@@ -281,13 +305,14 @@ if (bluePions.length > 0) {
   alert("Le joueur bleu n'a pas posé tous ses pions");
 // Sinon si le bleu a tout posé
 } else if (bluePions.length === 0) {
+
   // Si le rouge n'a rien posé,
   if (redPions.length === 40) {
     // Pour chaque bouton bleu, je rend le texte invisible
-    for (let btn of blueBtn) {
-      btn.childNodes[0].color = "#EFEFEF";
-      btn.style.color = "#EFEFEF";
-    }
+  /*  for (let j = 60 ; j < 100 ; j++) {
+      btnPlateau.item(j).hidden=true;
+      //btn.style.visibility="hidden";
+    }*/
   // Sinon, si le rouge a tout posé
   } else if (redPions.length === 0) {
     // J'affiche les boutons bleus
@@ -323,8 +348,14 @@ if (bluePions.length > 0) {
       minute: 0,
       seconde: 0
     };
-        alert("Tous les pions sont placés, lancement de la partie.");
+    /*
+    for (let j = 60 ; j < 100 ; j++) {
+      btnPlateau.item(j).hidden=false;
+      //btn.style.visibility="hidden";
+    }*/
+        alert("Tous les pions sont placés, lancement de la partie. Le rouge commence ");
     //Appel lancement partie quand les pions sont placés :
+
     PlayerTurn(PlayerRed, 'red');
       }
       ;
